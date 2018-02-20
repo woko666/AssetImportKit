@@ -124,15 +124,6 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                 } catch let error {
                     print(error)
                 }
-            } else if (filePath as NSString).pathExtension == "obj" {
-                // Create a MDLAsset from url
-                let asset = MDLAsset(url:URL(fileURLWithPath: filePath))
-                guard let object = asset.object(at: 0) as? MDLMesh else {
-                    fatalError("Failed to get mesh from asset.")
-                }
-                // Wrap the ModelIO object in a SceneKit object
-                let node = SCNNode(mdlObject: object)
-                self.modelContainerNode.addChildNode(node)
                 
             } else {
                 
@@ -156,13 +147,6 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                             let key = animationKeys![0] as! String
                             let eventBlock: SCNAnimationEventBlock = { animation, animatedObject, playingBackwards in
                                 print("Animation Event triggered")
-                                // To test removing animation uncomment
-                                // Then the animation wont repeat 3 times
-                                // as it will be removed after 90% of the first loop
-                                // is completed, as event key time is 0.9
-                                // self.scene.rootNode.removeAnimationScene(forKey: key, fadeOutDuration: 0.3)
-                                // self.scene.rootNode.pauseAnimationScene(forKey: key)
-                                // self.scene.rootNode.resumeAnimation(forKey: key)
                                 return
                             }
                             let animEvent = SCNAnimationEvent(keyTime: 0.1, block: eventBlock)

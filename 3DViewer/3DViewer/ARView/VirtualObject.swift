@@ -155,14 +155,6 @@ var VirtualObjectsFilePath: String {
             } catch let error {
                 print(error)
             }
-        } else if filePath.pathExtension == "obj" {
-            // Create a MDLAsset from url
-            let asset = MDLAsset(url:URL(fileURLWithPath: filePath as String))
-            guard let object = asset.object(at: 0) as? MDLMesh else {
-                fatalError("Failed to get mesh from asset.")
-            }
-            // Wrap the ModelIO object in a SceneKit object
-            node = SCNNode(mdlObject: object)
             
         } else {
             

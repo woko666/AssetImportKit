@@ -90,18 +90,6 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
             
             sceneView.scene?.rootNode.addChildNode(modelContainerNode)
             
-        } else if (filePath as NSString).pathExtension == "obj" {
-            // Create a MDLAsset from url
-            let asset = MDLAsset(url:URL(fileURLWithPath: filePath))
-            guard let object = asset.object(at: 0) as? MDLMesh else {
-                fatalError("Failed to get mesh from asset.")
-            }
-            // Wrap the ModelIO object in a SceneKit object
-            let node = SCNNode(mdlObject: object)
-            self.modelContainerNode.addChildNode(node)
-            
-            sceneView.scene?.rootNode.addChildNode(modelContainerNode)
-            
         } else {
             
             let assetImporter = AssetImporter()
@@ -140,7 +128,6 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
                 }
             }
         }
-        
         
         sceneDidLoad = true
         

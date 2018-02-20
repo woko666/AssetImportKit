@@ -9,6 +9,7 @@
 import Foundation
 import GLKit
 import SceneKit
+import SceneKit.ModelIO
 import PostProcessingFlags
 import cimport
 import light
@@ -979,8 +980,24 @@ import scene
         let scnGeometrySources = makeGeometrySources(for: aiNode, in: aiScene, withVertices: nVertices)
         if scnGeometrySources.count > 0 {
             
-            let scnGeometryElements = makeGeometryElementsForNode(aiNode, in: aiScene)
-            let scnGeometry = SCNGeometry(sources: scnGeometrySources, elements: scnGeometryElements)
+            var scnGeometry = SCNGeometry()
+            
+            if (path as NSString).pathExtension == "obj" {
+                // Create a MDLAsset from url
+                let asset = MDLAsset(url:URL(fileURLWithPath: path))
+                guard let object = asset.object(at: 0) as? MDLMesh else {
+                    fatalError("Failed to get mesh from asset.")
+                }
+                // Wrap the ModelIO object in a SceneKit object
+                let node = SCNNode(mdlObject: object)
+                if let geometry = node.geometry {
+                    scnGeometry = geometry
+                }
+            } else {
+                let scnGeometryElements = makeGeometryElementsForNode(aiNode, in: aiScene)
+                scnGeometry = SCNGeometry(sources: scnGeometrySources, elements: scnGeometryElements)
+            }
+            
             let scnMaterials = makeMaterials(for: aiNode, in: &aiScene, atPath: path)
             if scnMaterials.count > 0 {
                 scnGeometry.materials = scnMaterials
