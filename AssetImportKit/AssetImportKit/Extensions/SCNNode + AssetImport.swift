@@ -90,7 +90,9 @@ public extension SCNNode {
         else {
             // no root exists, so add animation data to all bones
             print(" no root: \(String(describing: rootAnimNode.parent)) \(String(describing: rootAnimNode.parent?.childNodes.count))")
-            addAnimation(from: rootAnimNode.parent!, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
+            if let parent = rootAnimNode.parent {
+                addAnimation(from: parent, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
+            }
         }
         
     }
