@@ -15,11 +15,6 @@ import Photos
 class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentationControllerDelegate, VirtualObjectSelectionViewControllerDelegate {
     
     // MARK: - Main Setup & View Controller methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        VirtualObject.readCoreData()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -49,16 +44,26 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
     
     func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Virtual objects didSet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Model file not found"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     @objc func handleNotification(_ notification: NSNotification) {
         if notification.name.rawValue == "Virtual objects didSet" {
-            let noObjects = VirtualObject.availableObjects.count == 0
-            self.leftButton.isEnabled = !noObjects
-            self.leftButton.isHidden = noObjects
-            self.rightButton.isEnabled = !noObjects
-            self.rightButton.isHidden = noObjects
+            DispatchQueue.main.async {
+                self.virtualObject?.unloadModel()
+                let noObjects = VirtualObject.availableObjects.count == 0
+                self.leftButton.isEnabled = !noObjects
+                self.leftButton.isHidden = noObjects
+                self.rightButton.isEnabled = !noObjects
+                self.rightButton.isHidden = noObjects
+            }
+        }
+        if notification.name.rawValue == "Model file not found" {
+            self.virtualObjectSelectionViewControllerDidDeselectObject(self.objectViewController)
+            let alertController = UIAlertController(title: "Model Error", message: "Model file not found", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
         if notification.name == NSNotification.Name.UIDeviceOrientationDidChange {
             DispatchQueue.main.async {
@@ -427,11 +432,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
         virtualObject?.removeFromParentNode()
         virtualObject = nil
         
-        addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
-        addObjectButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
+        DispatchQueue.main.async {
+            self.addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
+            self.addObjectButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
+        }
         
         // Reset selected object id for row highlighting in object selection view controller.
         UserDefaults.standard.set(-1, for: .selectedObjectID)
+        
+        VirtualObject.readArchivedData()
     }
     
     func updateVirtualObjectPosition(_ pos: SCNVector3, _ filterPosition: Bool) {
@@ -510,6 +519,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
     
     // MARK: - Virtual Object Loading
     
+    let objectViewController = VirtualObjectSelectionViewController()
     var virtualObject: VirtualObject?
     var isLoadingObject: Bool = false {
         didSet {
@@ -542,25 +552,35 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
             object.viewController = self
             self.virtualObject = object
             
-            object.loadModel()
+            let loadIsSuccessful = object.loadModel()
             
             DispatchQueue.main.async {
-                // Immediately place the object in 3D space.
-                if let lastFocusSquarePos = self.focusSquare?.lastPosition {
-                    self.setNewVirtualObjectPosition(lastFocusSquarePos)
+                
+                if !loadIsSuccessful {
+                    // Remove progress indicator
+                    spinner.removeFromSuperview()
+                    self.resetVirtualObject()
+                    self.isLoadingObject = false
+                    
                 } else {
-                    self.setNewVirtualObjectPosition(SCNVector3Zero)
+                    
+                    // Immediately place the object in 3D space.
+                    if let lastFocusSquarePos = self.focusSquare?.lastPosition {
+                        self.setNewVirtualObjectPosition(lastFocusSquarePos)
+                    } else {
+                        self.setNewVirtualObjectPosition(SCNVector3Zero)
+                    }
+                    
+                    // Remove progress indicator
+                    spinner.removeFromSuperview()
+                    
+                    // Update the icon of the add object button
+                    let buttonImage = UIImage.composeButtonImage(from: object.thumbImage)
+                    let pressedButtonImage = UIImage.composeButtonImage(from: object.thumbImage, alpha: 0.3)
+                    self.addObjectButton.setImage(buttonImage, for: [])
+                    self.addObjectButton.setImage(pressedButtonImage, for: [.highlighted])
+                    self.isLoadingObject = false
                 }
-                
-                // Remove progress indicator
-                spinner.removeFromSuperview()
-                
-                // Update the icon of the add object button
-                let buttonImage = UIImage.composeButtonImage(from: object.thumbImage)
-                let pressedButtonImage = UIImage.composeButtonImage(from: object.thumbImage, alpha: 0.3)
-                self.addObjectButton.setImage(buttonImage, for: [])
-                self.addObjectButton.setImage(pressedButtonImage, for: [.highlighted])
-                self.isLoadingObject = false
             }
         }
     }
@@ -571,16 +591,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
         
         textManager.cancelScheduledMessage(forType: .contentPlacement)
         
-        let rowHeight = 45
-        let popoverSize = CGSize(width: 250, height: rowHeight * (VirtualObject.availableObjects.count + 1))
-//        let screenWidth = UIScreen.main.bounds.width
-//        let screenHeight = UIScreen.main.bounds.height
-//        let popoverWidth = screenWidth - 80
-//        let popoverHeight = screenHeight - 240
-//
-//        let popoverSize = CGSize(width: popoverWidth, height: popoverHeight)
-        
-        let objectViewController = VirtualObjectSelectionViewController(size: popoverSize)
         objectViewController.delegate = self
         objectViewController.modalPresentationStyle = .popover
         objectViewController.popoverPresentationController?.delegate = self

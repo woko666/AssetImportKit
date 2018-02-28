@@ -84,15 +84,17 @@ var VirtualObjectsFilePath: String {
         self.init(from: file)
     }
     
-    func loadModel() {
+    func loadModel() -> Bool {
         
-        guard let file = file else {
-            return
+        var loadIsSuccessful = false
+        
+        guard let file = self.file else {
+            return false
         }
         
-        if FileManager.default.fileExists(atPath: updateFilePath(for: file).filePath.path) {
+        if FileManager.default.fileExists(atPath: self.updateFilePath(for: file).filePath.path) {
             
-            let wrapperNode = getNode(from: file)
+            let wrapperNode = self.getNode(from: file)
             
             self.addChildNode(wrapperNode)
             
@@ -101,11 +103,13 @@ var VirtualObjectsFilePath: String {
                 child.movabilityHint = .movable
             }
             
-            modelLoaded = true
+            self.modelLoaded = true
+            loadIsSuccessful = true
             
         } else {
             
-            self.unloadModel()
+            loadIsSuccessful = false
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "Model file not found"), object: nil, userInfo: nil)
             
             for objectIndex in 0 ... VirtualObject.availableObjects.count - 1 {
                 if VirtualObject.availableObjects[objectIndex].modelName == self.modelName {
@@ -113,11 +117,9 @@ var VirtualObjectsFilePath: String {
                 }
             }
             
-            let alertView = UIAlertView(title: "Model Error", message: "Model file not found", delegate: nil, cancelButtonTitle: "Okay")
-            alertView.show()
-            
         }
         
+        return loadIsSuccessful
         
     }
     
@@ -244,21 +246,15 @@ extension VirtualObject {
     static var availableObjects: [VirtualObject] = [] {
         didSet {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "Virtual objects didSet"), object: nil, userInfo: nil)
-            
-            if VirtualObject.availableObjects.count != 0 {
-                // Write objects to coreData
-                
-                NSKeyedArchiver.archiveRootObject(availableObjects, toFile: VirtualObjectsFilePath)
-                
-               
-            }
+            // Write objects to coreData
+            NSKeyedArchiver.archiveRootObject(availableObjects, toFile: VirtualObjectsFilePath)
         }
     }
     
-    static func readCoreData() {
+    static func readArchivedData() {
         
-        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: VirtualObjectsFilePath) as? [VirtualObject] {
-            VirtualObject.availableObjects = ourData
+        if let availableObjects = NSKeyedUnarchiver.unarchiveObject(withFile: VirtualObjectsFilePath) as? [VirtualObject] {
+            VirtualObject.availableObjects = availableObjects
         }
         
     }
