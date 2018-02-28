@@ -632,15 +632,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
         
         // configure session
         if let worldSessionConfig = sessionConfig as? ARWorldTrackingConfiguration {
-            if UserDefaults.standard.bool(for: .detectVerticalPlanes) {
-                if #available(iOS 11.3, *) {
-                    worldSessionConfig.planeDetection = .vertical
-                } else {
-                   worldSessionConfig.planeDetection = .horizontal
-                }
-            } else {
-                worldSessionConfig.planeDetection = .horizontal
-            }
+            worldSessionConfig.planeDetection = [.horizontal, .vertical]
             session.run(worldSessionConfig, options: [.resetTracking, .removeExistingAnchors])
         }
         

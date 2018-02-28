@@ -90,10 +90,11 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
             
             sceneView.scene?.rootNode.addChildNode(modelContainerNode)
             
+            
         } else {
             
             let assetImporter = AssetImporter()
-            if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: AssetImporterPostProcessSteps(rawValue: AssetImporterPostProcessSteps.process_FlipUVs.rawValue | AssetImporterPostProcessSteps.process_Triangulate.rawValue)) {
+            if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: AssetImporterPostProcessSteps(rawValue: AssetImporter_ProcessPreset_TargetRealtime_MaxQuality)) {
                 
                 if let modelScene = assimpScene.modelScene {
                     for childNode in modelScene.rootNode.childNodes {

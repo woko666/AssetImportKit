@@ -18,7 +18,6 @@ enum Setting: String {
     case use3DOFTracking
     case use3DOFFallback
     case useOcclusionPlanes
-    case detectVerticalPlanes
     
     // Integer state used in virtual object picker
     case selectedObjectID
@@ -27,9 +26,7 @@ enum Setting: String {
         UserDefaults.standard.register(defaults: [
             Setting.ambientLightEstimation.rawValue: true,
             Setting.dragOnInfinitePlanes.rawValue: true,
-            Setting.selectedObjectID.rawValue: -1,
-            Setting.detectVerticalPlanes.rawValue: true
-            ])
+            Setting.selectedObjectID.rawValue: -1])
     }
 }
 extension UserDefaults {
@@ -57,7 +54,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var use3DOFTrackingSwitch: UISwitch!
     @IBOutlet weak var useAuto3DOFFallbackSwitch: UISwitch!
     @IBOutlet weak var useOcclusionPlanesSwitch: UISwitch!
-    @IBOutlet weak var verticalPlaneDetectionSwitch: UISwitch!
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +80,6 @@ class SettingsViewController: UITableViewController {
             defaults.set(sender.isOn, for: .use3DOFFallback)
         case useOcclusionPlanesSwitch:
             defaults.set(sender.isOn, for: .useOcclusionPlanes)
-        case verticalPlaneDetectionSwitch:
-            defaults.set(sender.isOn, for: .detectVerticalPlanes)
         default: break
         }
     }
@@ -101,7 +95,6 @@ class SettingsViewController: UITableViewController {
         use3DOFTrackingSwitch.isOn = defaults.bool(for: .use3DOFTracking)
         useAuto3DOFFallbackSwitch.isOn = defaults.bool(for: .use3DOFFallback)
         useOcclusionPlanesSwitch.isOn = defaults.bool(for: .useOcclusionPlanes)
-        verticalPlaneDetectionSwitch.isOn = defaults.bool(for: .detectVerticalPlanes)
     }
 }
 

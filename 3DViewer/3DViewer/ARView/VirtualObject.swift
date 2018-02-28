@@ -159,7 +159,7 @@ var VirtualObjectsFilePath: String {
         } else {
             
             let assetImporter = AssetImporter()
-            let assetImporterScene = assetImporter.importScene(filePath as String, postProcessFlags: AssetImporterPostProcessSteps(rawValue: AssetImporterPostProcessSteps.process_FlipUVs.rawValue | AssetImporterPostProcessSteps.process_Triangulate.rawValue))
+            let assetImporterScene = assetImporter.importScene(filePath as String, postProcessFlags: AssetImporterPostProcessSteps(rawValue: AssetImporterPostProcessSteps.process_FlipUVs.rawValue | AssetImporterPostProcessSteps.process_Triangulate.rawValue | AssetImporterPostProcessSteps.process_SortByPType.rawValue))
             for childNode in (assetImporterScene?.modelScene?.rootNode.childNodes)! {
                 node.addChildNode(childNode)
             }
