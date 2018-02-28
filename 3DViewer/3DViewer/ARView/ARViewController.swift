@@ -49,6 +49,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
     
     func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Virtual objects didSet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     @objc func handleNotification(_ notification: NSNotification) {
@@ -58,6 +59,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
             self.leftButton.isHidden = noObjects
             self.rightButton.isEnabled = !noObjects
             self.rightButton.isHidden = noObjects
+        }
+        if notification.name == NSNotification.Name.UIDeviceOrientationDidChange {
+            DispatchQueue.main.async {
+                self.screenCenter = self.sceneView.bounds.mid
+            }
         }
     }
     
