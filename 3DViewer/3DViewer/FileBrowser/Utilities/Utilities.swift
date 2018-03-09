@@ -42,6 +42,7 @@ extension UIImage {
 }
 
 // MARK: - Collection extensions
+
 extension Array where Iterator.Element == CGFloat {
     var average: CGFloat? {
         guard !isEmpty else {
@@ -76,6 +77,54 @@ extension Array where Iterator.Element == SCNVector3 {
         ret.x /= fcount
         ret.y /= fcount
         ret.z /= fcount
+        
+        return ret
+    }
+}
+
+extension Array where Iterator.Element == SCNMatrix4 {
+    var average: SCNMatrix4? {
+        guard !isEmpty else {
+            return nil
+        }
+        
+        var ret = self.reduce(SCNMatrix4()) { (cur, next) -> SCNMatrix4 in
+            var cur = cur
+            cur.m11 += next.m11
+            cur.m12 += next.m12
+            cur.m13 += next.m13
+            cur.m14 += next.m14
+            cur.m21 += next.m21
+            cur.m22 += next.m22
+            cur.m23 += next.m23
+            cur.m24 += next.m24
+            cur.m31 += next.m31
+            cur.m32 += next.m32
+            cur.m33 += next.m33
+            cur.m34 += next.m34
+            cur.m41 += next.m41
+            cur.m42 += next.m42
+            cur.m43 += next.m43
+            cur.m44 += next.m44
+            return cur
+        }
+        let fcount = Float(count)
+        ret.m11 /= fcount
+        ret.m12 /= fcount
+        ret.m13 /= fcount
+        ret.m14 /= fcount
+        ret.m21 /= fcount
+        ret.m22 /= fcount
+        ret.m23 /= fcount
+        ret.m24 /= fcount
+        ret.m31 /= fcount
+        ret.m32 /= fcount
+        ret.m33 /= fcount
+        ret.m34 /= fcount
+        ret.m41 /= fcount
+        ret.m42 /= fcount
+        ret.m43 /= fcount
+        ret.m44 /= fcount
         
         return ret
     }

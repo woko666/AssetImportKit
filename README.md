@@ -43,7 +43,7 @@ Requirements
 Usage
 ---
 
-To use the library in your projects just build the iOS of macOS version of the framework and grab it from the target folder of the AssetImportKit project.
+Read the [`how-to-install`](HowToInstall.md) guide.
 
 Carthage support will be added in future.
 
