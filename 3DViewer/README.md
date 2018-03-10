@@ -33,7 +33,7 @@ In this app you're going to use the [`URLSession`](https://developer.apple.com/d
 
 **4.** Browsing local files with the help of the `FileManager`.
 
-**5.** Loading a model file directly into an `SCNScene` from a device's internal `URL`. You're going to do it with the help of `AssetImportKit` framework for loading uncompressed models.
+**5.** Loading a model file directly into an `SCNScene` from a device's internal `URL`. You're going to do it with the help of `AssetImportKit` - framework for loading uncompressed models.
 
 
 ## Native approach:
