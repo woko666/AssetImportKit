@@ -4,7 +4,7 @@
 
 ![First Step](HowToInstall/1.png)
 
-2. Choose `AssetImportKit-iOS` build scheme and `Generic Device` as destination.
+2. Choose `AssetImportKit-iOS` build scheme and `Generic Device` as destination. Press `command-B` to buld the framework.
 
 ![Second Step](HowToInstall/2.png)
 
