@@ -53,7 +53,7 @@ let assetImporter = AssetImporter()
 guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
 let modelScene = importedScene.modelScene else { return }
 /// Move child nodes from imported scene to container node
-modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
+modelScene.rootNode.childNodes.forEach { modelContainerNode.addChildNode($0) }
 sceneView.scene?.rootNode.addChildNode(modelContainerNode)
 ```
 
