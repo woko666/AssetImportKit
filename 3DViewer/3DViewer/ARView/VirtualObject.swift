@@ -161,7 +161,7 @@ var VirtualObjectsFilePath: String {
         } else {
             
             let assetImporter = AssetImporter()
-            let assetImporterScene = assetImporter.importScene(filePath as String, postProcessFlags: [.process_Triangulate, .process_FlipUVs, .process_SortByPType])
+            let assetImporterScene = assetImporter.importScene(filePath as String, postProcessFlags: [.defaultQuality])
             for childNode in (assetImporterScene?.modelScene?.rootNode.childNodes)! {
                 node.addChildNode(childNode)
             }

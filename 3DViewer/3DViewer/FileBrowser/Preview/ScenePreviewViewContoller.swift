@@ -131,7 +131,7 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                 
                 let assetImporter = AssetImporter()
 //                let fileURL = URL(fileURLWithPath: filePath)
-                if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.process_Triangulate, .process_FlipUVs, .process_SortByPType]) {
+                if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]) {
                     
                     if let modelScene = assimpScene.modelScene {
                         for childNode in modelScene.rootNode.childNodes {
