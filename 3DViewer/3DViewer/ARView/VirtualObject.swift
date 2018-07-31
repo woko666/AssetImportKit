@@ -161,10 +161,9 @@ var VirtualObjectsFilePath: String {
         } else {
             
             let assetImporter = AssetImporter()
-            let assetImporterScene = assetImporter.importScene(filePath as String, postProcessFlags: [.defaultQuality])
-            for childNode in (assetImporterScene?.modelScene?.rootNode.childNodes)! {
-                node.addChildNode(childNode)
-            }
+            guard let assimpScene = assetImporter.importScene(filePath as String, postProcessFlags: [.defaultQuality]),
+                let modelScene = assimpScene.modelScene else { return node }
+            modelScene.rootNode.childNodes.forEach { node.addChildNode($0) }
         }
         
         return node

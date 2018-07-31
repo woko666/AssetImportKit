@@ -92,38 +92,33 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
         } else {
             
             let assetImporter = AssetImporter()
-            if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]) {
-                
-                if let modelScene = assimpScene.modelScene {
-                    for childNode in modelScene.rootNode.childNodes {
-                        self.modelContainerNode.addChildNode(childNode)
+            guard let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
+                modelScene = assimpScene.modelScene
+                else { return }
+            modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
+            sceneView.scene?.rootNode.addChildNode(modelContainerNode)
+            
+            let animationKeys = assimpScene.animationKeys()
+            // If multiple animations exist, load the first animation
+            if let numberOfAnimationKeys = animationKeys?.count {
+                if numberOfAnimationKeys > 0 {
+                    var settings = AssetImporterAnimSettings()
+                    settings.repeatCount = 5
+                    
+                    let key = animationKeys![0] as! String
+                    let eventBlock: SCNAnimationEventBlock = { animation, animatedObject, playingBackwards in
+                        print("Animation Event triggered")
+                        return
                     }
-                }
-                
-                sceneView.scene?.rootNode.addChildNode(modelContainerNode)
-                
-                let animationKeys = assimpScene.animationKeys()
-                // If multiple animations exist, load the first animation
-                if let numberOfAnimationKeys = animationKeys?.count {
-                    if numberOfAnimationKeys > 0 {
-                        var settings = AssetImporterAnimSettings()
-                        settings.repeatCount = 5
-                        
-                        let key = animationKeys![0] as! String
-                        let eventBlock: SCNAnimationEventBlock = { animation, animatedObject, playingBackwards in
-                            print("Animation Event triggered")
-                            return
-                        }
-                        let animEvent = SCNAnimationEvent(keyTime: 0.1, block: eventBlock)
-                        let animEvents: [SCNAnimationEvent]  = [animEvent]
-                        settings.animationEvents = animEvents
-                        settings.delegate = self
-                        
-                        if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
-                            sceneView.scene?.rootNode.addAnimationScene(&animation, forKey: key, with: &settings)
-                        }
-                        
+                    let animEvent = SCNAnimationEvent(keyTime: 0.1, block: eventBlock)
+                    let animEvents: [SCNAnimationEvent]  = [animEvent]
+                    settings.animationEvents = animEvents
+                    settings.delegate = self
+                    
+                    if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
+                        sceneView.scene?.rootNode.addAnimationScene(&animation, forKey: key, with: &settings)
                     }
+                    
                 }
             }
         }

@@ -130,14 +130,10 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
             } else {
                 
                 let assetImporter = AssetImporter()
-//                let fileURL = URL(fileURLWithPath: filePath)
-                if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]) {
-                    
-                    if let modelScene = assimpScene.modelScene {
-                        for childNode in modelScene.rootNode.childNodes {
-                            self.modelContainerNode.addChildNode(childNode)
-                        }
-                    }
+                guard let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
+                    let modelScene = assimpScene.modelScene
+                    else { return }
+                modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
                     
                     let animationKeys = assimpScene.animationKeys()
                     // If multiple animations exist, load the first animation
@@ -161,7 +157,6 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                             }
                             
                         }
-                    }
                 }
             }
         }
