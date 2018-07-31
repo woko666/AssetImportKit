@@ -130,12 +130,12 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
             } else {
                 
                 let assetImporter = AssetImporter()
-                guard let assimpScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
-                    let modelScene = assimpScene.modelScene
+                guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
+                    let modelScene = importedScene.modelScene
                     else { return }
                 modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
                     
-                    let animationKeys = assimpScene.animationKeys()
+                    let animationKeys = importedScene.animationKeys()
                     // If multiple animations exist, load the first animation
                     if let numberOfAnimationKeys = animationKeys?.count {
                         if numberOfAnimationKeys > 0 {
@@ -152,7 +152,7 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                             settings.animationEvents = animEvents
                             settings.delegate = self
                             
-                            if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
+                            if var animation = importedScene.animationScenes.value(forKey: key) as? SCNScene {
                                 self.modelContainerNode.addAnimationScene(&animation, forKey: key, with: &settings)
                             }
                             
