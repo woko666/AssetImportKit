@@ -10,6 +10,9 @@ import Foundation
 import scene
 import postprocess
 
+
+public extension AssetImporterPostProcessSteps {
+
 // -----------------------------------------------------------------------------
 /** AssetImporter_ProcessPreset_TargetRealtimeUse_Fast
  *  @brief Default postprocess configuration optimizing the data for real-time
@@ -25,12 +28,16 @@ import postprocess
  *  Some of them offer further configurable properties, while some of them might
  *   not be of use for you so it might be better to not specify them.
  */
-public let realtimeFast: AssetImporterPostProcessSteps = [.process_CalcTangentSpace,
-                                                                .process_GenNormals,
-                                                                .joinIdenticalVertices,
-                                                                .process_Triangulate,
-                                                                .process_GenUVCoords,
-                                                                .process_SortByPType]
+    public static var realtimeFast: AssetImporterPostProcessSteps {
+        get {
+            return [.process_CalcTangentSpace,
+                    .process_GenNormals,
+                    .joinIdenticalVertices,
+                    .process_Triangulate,
+                    .process_GenUVCoords,
+                    .process_SortByPType]
+        }
+    }
 
 // -----------------------------------------------------------------------------
 /** AssetImporter_ProcessPreset_TargetRealtime_Quality
@@ -49,17 +56,21 @@ public let realtimeFast: AssetImporterPostProcessSteps = [.process_CalcTangentSp
  *  Some of them offer further configurable properties, while some of them might
  *  not be of use for you so it might be better to not specify them.
  */
-public let realtimeQuality: AssetImporterPostProcessSteps = [.process_CalcTangentSpace,
-                                                                   .process_GenSmoothNormals,
-                                                                   .process_ImproveCacheLocality,
-                                                                   .process_LimitBoneWeights,
-                                                                   .process_RemoveRedundantMaterials,
-                                                                   .process_SplitLargeMeshes,
-                                                                   .process_Triangulate,
-                                                                   .process_GenUVCoords,
-                                                                   .process_SortByPType,
-                                                                   .process_FindDegenerates,
-                                                                   .process_FindInvalidData]
+    public static var realtimeQuality: AssetImporterPostProcessSteps {
+        get {
+            return  [.process_CalcTangentSpace,
+                     .process_GenSmoothNormals,
+                     .process_ImproveCacheLocality,
+                     .process_LimitBoneWeights,
+                     .process_RemoveRedundantMaterials,
+                     .process_SplitLargeMeshes,
+                     .process_Triangulate,
+                     .process_GenUVCoords,
+                     .process_SortByPType,
+                     .process_FindDegenerates,
+                     .process_FindInvalidData]
+        }
+    }
 
 
 // ------------------------------------------------------------------------------
@@ -79,7 +90,13 @@ public let realtimeQuality: AssetImporterPostProcessSteps = [.process_CalcTangen
  *  further configurable properties, while some of them might not be of use for
  *  you so it might be better to not specify them.
  */
-public let realtimeMaxQuality: AssetImporterPostProcessSteps = [realtimeQuality,
-                                                                      .process_FindInstances,
-                                                                      .process_ValidateDataStructure,
-                                                                      .process_OptimizeMeshes]
+    public static var realtimeMaxQuality: AssetImporterPostProcessSteps {
+        get {
+            return [.realtimeQuality,
+                    .process_FindInstances,
+                    .process_ValidateDataStructure,
+                    .process_OptimizeMeshes]
+        }
+    }
+
+}
