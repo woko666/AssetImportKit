@@ -10,8 +10,7 @@
     <img src="Media/AssetImportKit_Demonstration.png", width="818">
 </p>
 
-Features
----
+## Features
 
 AssetImportKit allows you to import ***Assimp supported file formats*** directly in SceneKit at runtime.
 The library supports:
@@ -26,28 +25,41 @@ The library supports:
 AssetImportKit supports the following file formats:
 3D, 3DS, 3MF, AC, AC3D, ACC, AMJ, ASE, ASK, B3D, BLEND (Blender), BVH, COB, CMS, DAE/Collada, DXF, ENFF, FBX, glTF 1.0 + GLB, glTF 2.0, HMB, IFC-STEP, IRR / IRRMESH, LWO, LWS, LXO, MD2, MD3, MD5, MDC, MDL, MESH / MESH.XML, MOT, MS3D, NDO, NFF, OBJ, OFF, OGEX, PLY, PMX, PRJ, Q3O, Q3S, RAW, SCN, SIB, SMD, STL, STP, TER, UC, VTA, X, X3D, XGL, ZGL.
 
-Demos
----
+## Demos
+
 This repository includes 2 small demos for macOS and iOS.
 
 <a href="3DViewer/README.md"><img src="Media/iOS Example App.png" width=50%></a><a href="SceneKitAssetImport/README.md"><img src="Media/macOS Example App.png" width=50%></a>
 
-Requirements
----
+## Requirements
 
-- Xcode 9.0 or later
-- Swift 4
-- iOS 11.0 or later
-- macOS 10.12 or later
+- Xcode 10 or later
+- Swift 4.2
+- iOS 11.3 or later
+- macOS 10.13 or later
 
-Usage
----
+## Installation
 
-Read the [`how-to-install`](HowToInstall.md) guide.
+For installation please read the [`how-to-install`](HowToInstall.md) guide.
 
-Carthage support will be added in future.
+## Usage
+
+```Swift
+/// Create container node
+var modelContainerNode = SCNNode()
+/// Create AssetImporter
+let assetImporter = AssetImporter()
+/// Import Scene
+guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
+let modelScene = importedScene.modelScene else { return }
+/// Move child nodes from imported scene to container node
+modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
+sceneView.scene?.rootNode.addChildNode(modelContainerNode)
+```
 
 Note for `iOS` builds: if you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
+
+CocoaPods support will be added in future.
 
 ## Author
 | [<img src="https://avatars1.githubusercontent.com/u/8983647?s=460&amp;v=4" width="120px;"/>](https://github.com/eugenebokhan)   | [Eugene Bokhan](https://github.com/eugenebokhan)<br/><br/><sub>Software Engineer @ [Prisma AI](https://prismalabs.ai)</sub><br/> [![Twitter][1.1]][1] [![Github][2.1]][2] [![LinkedIn][3.1]][3]|

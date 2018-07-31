@@ -951,7 +951,7 @@ import scene
                     } else if lightingModelRawValue == 3 {
                         lightingModel = .phong
                     } else {
-                        lightingModel = .physicallyBased
+                        lightingModel = .blinn
                     }
                     
                     material.lightingModel = lightingModel
