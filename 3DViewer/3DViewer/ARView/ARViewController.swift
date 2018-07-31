@@ -732,7 +732,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
             planes.values.forEach { $0.showDebugVisualization(showDebugVisuals) }
             
             if showDebugVisuals {
-                sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+                sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
             } else {
                 sceneView.debugOptions = []
             }

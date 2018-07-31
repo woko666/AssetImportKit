@@ -25,13 +25,12 @@ import postprocess
  *  Some of them offer further configurable properties, while some of them might
  *   not be of use for you so it might be better to not specify them.
  */
-public let AssetImporter_ProcessPreset_TargetRealtime_Fast = UInt32( AssetImporterPostProcessSteps.process_CalcTangentSpace.rawValue |
-    AssetImporterPostProcessSteps.process_GenNormals.rawValue |
-    AssetImporterPostProcessSteps.joinIdenticalVertices.rawValue |
-    AssetImporterPostProcessSteps.process_Triangulate.rawValue |
-    AssetImporterPostProcessSteps.process_GenUVCoords.rawValue |
-    AssetImporterPostProcessSteps.process_SortByPType.rawValue |
-    0 )
+public let realtimeFast: AssetImporterPostProcessSteps = [.process_CalcTangentSpace,
+                                                                .process_GenNormals,
+                                                                .joinIdenticalVertices,
+                                                                .process_Triangulate,
+                                                                .process_GenUVCoords,
+                                                                .process_SortByPType]
 
 // -----------------------------------------------------------------------------
 /** AssetImporter_ProcessPreset_TargetRealtime_Quality
@@ -50,18 +49,17 @@ public let AssetImporter_ProcessPreset_TargetRealtime_Fast = UInt32( AssetImport
  *  Some of them offer further configurable properties, while some of them might
  *  not be of use for you so it might be better to not specify them.
  */
-public let AssetImporter_ProcessPreset_TargetRealtime_Quality = UInt32( AssetImporterPostProcessSteps.process_CalcTangentSpace.rawValue |
-    AssetImporterPostProcessSteps.process_GenSmoothNormals.rawValue |
-    AssetImporterPostProcessSteps.joinIdenticalVertices.rawValue |
-    AssetImporterPostProcessSteps.process_ImproveCacheLocality.rawValue |
-    AssetImporterPostProcessSteps.process_LimitBoneWeights.rawValue |
-    AssetImporterPostProcessSteps.process_RemoveRedundantMaterials.rawValue | AssetImporterPostProcessSteps.process_SplitLargeMeshes.rawValue |
-    AssetImporterPostProcessSteps.process_Triangulate.rawValue |
-    AssetImporterPostProcessSteps.process_GenUVCoords.rawValue |
-    AssetImporterPostProcessSteps.process_SortByPType.rawValue |
-    AssetImporterPostProcessSteps.process_FindDegenerates.rawValue |
-    AssetImporterPostProcessSteps.process_FindInvalidData.rawValue |
-    0 )
+public let realtimeQuality: AssetImporterPostProcessSteps = [.process_CalcTangentSpace,
+                                                                   .process_GenSmoothNormals,
+                                                                   .process_ImproveCacheLocality,
+                                                                   .process_LimitBoneWeights,
+                                                                   .process_RemoveRedundantMaterials,
+                                                                   .process_SplitLargeMeshes,
+                                                                   .process_Triangulate,
+                                                                   .process_GenUVCoords,
+                                                                   .process_SortByPType,
+                                                                   .process_FindDegenerates,
+                                                                   .process_FindInvalidData]
 
 
 // ------------------------------------------------------------------------------
@@ -81,8 +79,7 @@ public let AssetImporter_ProcessPreset_TargetRealtime_Quality = UInt32( AssetImp
  *  further configurable properties, while some of them might not be of use for
  *  you so it might be better to not specify them.
  */
-public let AssetImporter_ProcessPreset_TargetRealtime_MaxQuality = UInt32( AssetImporter_ProcessPreset_TargetRealtime_Quality |
-    AssetImporterPostProcessSteps.process_FindInstances.rawValue |
-    AssetImporterPostProcessSteps.process_ValidateDataStructure.rawValue |
-    AssetImporterPostProcessSteps.process_OptimizeMeshes.rawValue |
-    0 )
+public let realtimeMaxQuality: AssetImporterPostProcessSteps = [realtimeQuality,
+                                                                      .process_FindInstances,
+                                                                      .process_ValidateDataStructure,
+                                                                      .process_OptimizeMeshes]
