@@ -9,6 +9,7 @@
 import Foundation
 import scene
 import postprocess
+import types
 
 // just for backwards compatibility, don't use these constants anymore
 public let AI_SUCCESS = postprocess.aiReturn_SUCCESS

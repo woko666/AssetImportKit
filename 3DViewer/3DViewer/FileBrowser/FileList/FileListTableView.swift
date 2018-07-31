@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@available(iOS, deprecated: 9.0)
 extension FileListViewController {
     
     // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -101,13 +102,13 @@ extension FileListViewController {
         return collation.section(forSectionIndexTitle: index)
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
             let selectedFile = fileForIndexPath(indexPath)
             selectedFile.delete()
             
             prepareData()
-            tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
+            tableView.reloadSections([indexPath.section], with: .automatic)
         }
     }
     

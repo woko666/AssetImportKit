@@ -12,6 +12,8 @@ import SceneKit
 /**
  A scenekit SCNNode category which imitates the SCNAnimatable protocol.
  */
+@available(iOS, deprecated: 9.0)
+@available(OSX, deprecated: 10.13)
 public extension SCNNode {
     
     // MARK: - SCNAnimatable Clone
@@ -41,7 +43,9 @@ public extension SCNNode {
                 }
                 animation.speed = settings.speed
                 animation.autoreverses = settings.autoreverses
-                animation.fillMode = settings.fillMode
+                #if os(OSX)
+                animation.fillMode = settings.fillMode!
+                #endif
                 // Animation attributes
                 animation.isRemovedOnCompletion = settings.isRemovedOnCompletion
                 animation.timingFunction = settings.timingFunction

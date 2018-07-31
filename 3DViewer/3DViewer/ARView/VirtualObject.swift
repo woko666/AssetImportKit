@@ -144,7 +144,7 @@ var VirtualObjectsFilePath: String {
     
     func getNode(from sceneFile: FBFile) -> SCNNode {
         
-        var node = SCNNode()
+        let node = SCNNode()
         
         let filePath = updateFilePath(for: sceneFile).filePath.path as NSString
         
@@ -217,7 +217,7 @@ var VirtualObjectsFilePath: String {
             resultImage = resizedImage
             
             // Write image to documents directory
-            if let data = UIImagePNGRepresentation(resultImage) {
+            if let data = resultImage.pngData() {
                 try? data.write(to: URL(fileURLWithPath: imagePath!))
             }
             

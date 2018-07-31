@@ -22,7 +22,7 @@ extension UIImage {
     
     static func composeButtonImage(from thumbImage: UIImage, alpha: CGFloat = 1.0) -> UIImage {
         let maskImage = #imageLiteral(resourceName: "buttonring")
-        var thumbnailImage = thumbImage
+        let thumbnailImage = thumbImage
 //        if let invertedImage = thumbImage.inverted() {
 //            thumbnailImage = invertedImage
 //        }
@@ -130,7 +130,7 @@ extension Array where Iterator.Element == SCNMatrix4 {
     }
 }
 
-extension RangeReplaceableCollection where IndexDistance == Int {
+extension RangeReplaceableCollection {
     mutating func keepLast(_ elementsToKeep: Int) {
         if count > elementsToKeep {
             self.removeFirst(count - elementsToKeep)
@@ -164,6 +164,7 @@ extension SCNNode {
 extension SCNVector3 {
     
     init(_ vec: vector_float3) {
+        self.init()
         self.x = vec.x
         self.y = vec.y
         self.z = vec.z
@@ -282,11 +283,13 @@ extension SCNMaterial {
 extension CGPoint {
     
     init(_ size: CGSize) {
+        self.init()
         self.x = size.width
         self.y = size.height
     }
     
     init(_ vector: SCNVector3) {
+        self.init()
         self.x = CGFloat(vector.x)
         self.y = CGFloat(vector.y)
     }
@@ -345,6 +348,7 @@ func *= (left: inout CGPoint, right: CGFloat) {
 extension CGSize {
     
     init(_ point: CGPoint) {
+        self.init()
         self.width = point.x
         self.height = point.y
     }
@@ -681,8 +685,8 @@ public func animationWithKeyPath(_ keyPath: String, damping: CGFloat = 10, initi
     guard #available(iOS 9, *) else {
         let basic            = CABasicAnimation(keyPath: keyPath)
         basic.duration       = 0.16
-        basic.fillMode       = kCAFillModeForwards
-        basic.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        basic.fillMode       = .forwards
+        basic.timingFunction = CAMediaTimingFunction(name: .default)
         
         return basic
     }
@@ -692,8 +696,8 @@ public func animationWithKeyPath(_ keyPath: String, damping: CGFloat = 10, initi
     spring.damping         = damping
     spring.initialVelocity = initialVelocity
     spring.stiffness       = stiffness
-    spring.fillMode        = kCAFillModeForwards
-    spring.timingFunction  = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+    spring.fillMode        = .forwards
+    spring.timingFunction  = CAMediaTimingFunction(name: .default)
     
     return spring
 }
@@ -702,8 +706,8 @@ public func animationWithKeyPath(_ keyPath: String, damping: CGFloat = 10, initi
     guard #available(iOS 9, *) else {
         let basic            = CABasicAnimation(keyPath: keyPath)
         basic.duration       = duration
-        basic.fillMode       = kCAFillModeForwards
-        basic.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        basic.fillMode       = .forwards
+        basic.timingFunction = CAMediaTimingFunction(name: .default)
         
         return basic
     }
@@ -713,8 +717,8 @@ public func animationWithKeyPath(_ keyPath: String, damping: CGFloat = 10, initi
     spring.damping         = damping
     spring.initialVelocity = initialVelocity
     spring.stiffness       = stiffness
-    spring.fillMode        = kCAFillModeForwards
-    spring.timingFunction  = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+    spring.fillMode        = .forwards
+    spring.timingFunction  = CAMediaTimingFunction(name: .default)
     
     return spring
 }

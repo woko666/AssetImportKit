@@ -83,6 +83,7 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
     }
     
     // MARK: - UITableViewDelegate
+    @available(iOS, deprecated: 9.0)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Add new object" {
@@ -153,17 +154,17 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableViewtableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             if indexPath.row == selectedVirtualObjectRow {
                 delegate?.virtualObjectSelectionViewControllerDidDeselectObject(self)
             }
             VirtualObject.availableObjects.remove(at: indexPath.row)
-            tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
+            tableView.reloadSections([indexPath.section], with: .automatic)
         }
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Add new object" {
             return .none
         } else {

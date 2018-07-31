@@ -173,13 +173,13 @@ module scene [system][extern_c] {
 //    header "Dependencies/Assimp/Assimp C API/texture.h"
 //    export *
 //}
-//
-//module types [system][extern_c] {
-//
-//    header "Dependencies/Assimp/Assimp C API/types.h"
-//    export *
-//}
-//
+
+module types [system][extern_c] {
+
+    header "Dependencies/Assimp/Assimp C API/types.h"
+    export *
+}
+
 //module vector2 [system][extern_c] {
 //
 //    header "Dependencies/Assimp/Assimp C API/vector2.h"

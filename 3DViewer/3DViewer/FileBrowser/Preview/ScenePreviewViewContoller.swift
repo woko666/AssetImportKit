@@ -12,6 +12,8 @@ import SceneKit
 import SceneKit.ModelIO
 import AssetImportKit
 
+@available(iOS, deprecated: 9.0)
+@available(OSX, deprecated: 10.13)
 class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
 
     // MARK: - UI Elements
@@ -128,7 +130,7 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
             } else {
                 
                 let assetImporter = AssetImporter()
-                let fileURL = URL(fileURLWithPath: filePath)
+//                let fileURL = URL(fileURLWithPath: filePath)
                 if let assimpScene = assetImporter.importScene(filePath, postProcessFlags: AssetImporterPostProcessSteps(rawValue: AssetImporterPostProcessSteps.process_FlipUVs.rawValue | AssetImporterPostProcessSteps.process_Triangulate.rawValue )) {
                     
                     if let modelScene = assimpScene.modelScene {

@@ -72,7 +72,7 @@ import UIKit
         super.layoutSubviews()
     }
     
-    public override func setTitle(_ title: String?, for state: UIControlState) {
+    public override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle("", for: state)
     }
     

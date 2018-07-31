@@ -19,8 +19,6 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
     
     // MARK: - UI Actions
     
-    
-    
     @IBAction func openAssetAction(_ sender: Any) {
         openAsset()
     }
@@ -164,7 +162,45 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
         dialog.canChooseDirectories    = true;
         dialog.canCreateDirectories    = true;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["dae", "fbx", "obj", "scn", "md3", "zgl", "xgl", "wrl", "stl", "smd", "raw", "q3s", "q3o", "ply", "xml", "mesh", "off", "nff", "m3sd", "md5anim", "md5mesh", "md2", "irr", "ifc", "dxf", "cob", "bvh", "b3d", "ac", "blend", "hmp", "3ds", "3d", "x", "ter", "max", "ms3d", "mdl", "ase"];
+        dialog.allowedFileTypes        = ["dae",
+                                          "fbx",
+                                          "obj",
+                                          "scn",
+                                          "md3",
+                                          "zgl",
+                                          "xgl",
+                                          "wrl",
+                                          "stl",
+                                          "smd",
+                                          "raw",
+                                          "q3s",
+                                          "q3o",
+                                          "ply",
+                                          "xml",
+                                          "mesh",
+                                          "off",
+                                          "nff",
+                                          "m3sd",
+                                          "md5anim",
+                                          "md5mesh",
+                                          "md2",
+                                          "irr",
+                                          "ifc",
+                                          "dxf",
+                                          "cob",
+                                          "bvh",
+                                          "b3d",
+                                          "ac",
+                                          "blend",
+                                          "hmp",
+                                          "3ds",
+                                          "3d",
+                                          "x",
+                                          "ter",
+                                          "max",
+                                          "ms3d",
+                                          "mdl",
+                                          "ase"];
         
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             let result = dialog.url // Pathname of the file

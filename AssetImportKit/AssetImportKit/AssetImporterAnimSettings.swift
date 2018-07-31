@@ -61,7 +61,7 @@ import SceneKit
      Determines if the receiver’s presentation is frozen or removed once its active
      duration has completed.
      */
-    public var fillMode = ""
+    public var fillMode: CAMediaTimingFillMode?
     
     // MARK: - Animation attributes
     
@@ -144,7 +144,11 @@ import SceneKit
         duration = 0
         speed = 1.0
         autoreverses = false
-        fillMode = kCAFillModeRemoved
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        fillMode = nil
+        #elseif os(OSX)
+        fillMode = .removed
+        #endif
         isRemovedOnCompletion = true
         timingFunction = nil
         usesSceneTimeBase = false

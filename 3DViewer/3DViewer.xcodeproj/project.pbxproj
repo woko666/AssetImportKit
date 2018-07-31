@@ -13,8 +13,6 @@
 		08BD97A41F6AB9D500F9A59A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD97A31F6AB9D500F9A59A /* AppDelegate.swift */; };
 		08BD97A91F6AB9D500F9A59A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BD97A71F6AB9D500F9A59A /* Main.storyboard */; };
 		08BD97AB1F6AB9D500F9A59A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD97AA1F6AB9D500F9A59A /* Assets.xcassets */; };
-		08BD97B91F6AB9D600F9A59A /* _DViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD97B81F6AB9D600F9A59A /* _DViewerTests.swift */; };
-		08BD97C41F6AB9D600F9A59A /* _DViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD97C31F6AB9D600F9A59A /* _DViewerUITests.swift */; };
 		08BD97D21F6ABBF500F9A59A /* DownloadFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD97D11F6ABBF500F9A59A /* DownloadFilesViewController.swift */; };
 		08BD97D41F6AC23800F9A59A /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD97D31F6AC23800F9A59A /* DownloadManager.swift */; };
 		08BD97EC1F6AC39A00F9A59A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BD97EB1F6AC39A00F9A59A /* WebKit.framework */; };
@@ -65,23 +63,6 @@
 		18A3012C20330F0500ED442A /* AssetImportKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18A3012920330EFD00ED442A /* AssetImportKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		08BD97B51F6AB9D600F9A59A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08BD97981F6AB9D500F9A59A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 08BD979F1F6AB9D500F9A59A;
-			remoteInfo = 3DViewer;
-		};
-		08BD97C01F6AB9D600F9A59A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08BD97981F6AB9D500F9A59A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 08BD979F1F6AB9D500F9A59A;
-			remoteInfo = 3DViewer;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		18A3012D20330F0500ED442A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -106,10 +87,8 @@
 		08BD97A81F6AB9D500F9A59A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08BD97AA1F6AB9D500F9A59A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08BD97AF1F6AB9D500F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08BD97B41F6AB9D600F9A59A /* 3DViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 3DViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD97B81F6AB9D600F9A59A /* _DViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _DViewerTests.swift; sourceTree = "<group>"; };
 		08BD97BA1F6AB9D600F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08BD97BF1F6AB9D600F9A59A /* 3DViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 3DViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD97C31F6AB9D600F9A59A /* _DViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _DViewerUITests.swift; sourceTree = "<group>"; };
 		08BD97C51F6AB9D600F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08BD97D11F6ABBF500F9A59A /* DownloadFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFilesViewController.swift; sourceTree = "<group>"; };
@@ -174,20 +153,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		08BD97B11F6AB9D600F9A59A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08BD97BC1F6AB9D600F9A59A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -206,8 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				08BD97A01F6AB9D500F9A59A /* 3DViewer.app */,
-				08BD97B41F6AB9D600F9A59A /* 3DViewerTests.xctest */,
-				08BD97BF1F6AB9D600F9A59A /* 3DViewerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,42 +366,6 @@
 			productReference = 08BD97A01F6AB9D500F9A59A /* 3DViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		08BD97B31F6AB9D600F9A59A /* 3DViewerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 08BD97CB1F6AB9D600F9A59A /* Build configuration list for PBXNativeTarget "3DViewerTests" */;
-			buildPhases = (
-				08BD97B01F6AB9D600F9A59A /* Sources */,
-				08BD97B11F6AB9D600F9A59A /* Frameworks */,
-				08BD97B21F6AB9D600F9A59A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				08BD97B61F6AB9D600F9A59A /* PBXTargetDependency */,
-			);
-			name = 3DViewerTests;
-			productName = 3DViewerTests;
-			productReference = 08BD97B41F6AB9D600F9A59A /* 3DViewerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		08BD97BE1F6AB9D600F9A59A /* 3DViewerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 08BD97CE1F6AB9D600F9A59A /* Build configuration list for PBXNativeTarget "3DViewerUITests" */;
-			buildPhases = (
-				08BD97BB1F6AB9D600F9A59A /* Sources */,
-				08BD97BC1F6AB9D600F9A59A /* Frameworks */,
-				08BD97BD1F6AB9D600F9A59A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				08BD97C11F6AB9D600F9A59A /* PBXTargetDependency */,
-			);
-			name = 3DViewerUITests;
-			productName = 3DViewerUITests;
-			productReference = 08BD97BF1F6AB9D600F9A59A /* 3DViewerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -453,16 +380,6 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
-					};
-					08BD97B31F6AB9D600F9A59A = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 08BD979F1F6AB9D500F9A59A;
-					};
-					08BD97BE1F6AB9D600F9A59A = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 08BD979F1F6AB9D500F9A59A;
 					};
 				};
 			};
@@ -480,8 +397,6 @@
 			projectRoot = "";
 			targets = (
 				08BD979F1F6AB9D500F9A59A /* 3DViewer */,
-				08BD97B31F6AB9D600F9A59A /* 3DViewerTests */,
-				08BD97BE1F6AB9D600F9A59A /* 3DViewerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -503,20 +418,6 @@
 				089A7F321F6ACDE900A7E1D8 /* scene@2x.png in Resources */,
 				08BD97A91F6AB9D500F9A59A /* Main.storyboard in Resources */,
 				08BD98181F6AC6E400F9A59A /* documents@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08BD97B21F6AB9D600F9A59A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08BD97BD1F6AB9D600F9A59A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,36 +469,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		08BD97B01F6AB9D600F9A59A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08BD97B91F6AB9D600F9A59A /* _DViewerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08BD97BB1F6AB9D600F9A59A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08BD97C41F6AB9D600F9A59A /* _DViewerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		08BD97B61F6AB9D600F9A59A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 08BD979F1F6AB9D500F9A59A /* 3DViewer */;
-			targetProxy = 08BD97B51F6AB9D600F9A59A /* PBXContainerItemProxy */;
-		};
-		08BD97C11F6AB9D600F9A59A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 08BD979F1F6AB9D500F9A59A /* 3DViewer */;
-			targetProxy = 08BD97C01F6AB9D600F9A59A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		08BD97A71F6AB9D500F9A59A /* Main.storyboard */ = {
@@ -737,7 +609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 63TG84TE66;
+				DEVELOPMENT_TEAM = U59P58LC6V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -750,9 +622,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3DViewer",
-					"$(PROJECT_DIR)/3DViewer/Assimp",
-					"$(PROJECT_DIR)/3DViewer/Assimp/Dependencies/assimp/lib/osx",
-					"$(PROJECT_DIR)/3DViewer/Assimp/Dependencies/assimp/lib/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -760,12 +629,12 @@
 					"-lz",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.evgeniybokhan.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/3DViewer/Assimp $(SRCROOT)/3DViewer/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "3DViewer/3DViewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -776,7 +645,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 63TG84TE66;
+				DEVELOPMENT_TEAM = U59P58LC6V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,9 +658,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3DViewer",
-					"$(PROJECT_DIR)/3DViewer/Assimp",
-					"$(PROJECT_DIR)/3DViewer/Assimp/Dependencies/assimp/lib/osx",
-					"$(PROJECT_DIR)/3DViewer/Assimp/Dependencies/assimp/lib/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -799,74 +665,12 @@
 					"-lz",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.evgeniybokhan.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/3DViewer/Assimp $(SRCROOT)/3DViewer/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "3DViewer/3DViewer-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		08BD97CC1F6AB9D600F9A59A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = 3DViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeniybokhan.-DViewerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3DViewer.app/3DViewer";
-			};
-			name = Debug;
-		};
-		08BD97CD1F6AB9D600F9A59A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = 3DViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeniybokhan.-DViewerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3DViewer.app/3DViewer";
-			};
-			name = Release;
-		};
-		08BD97CF1F6AB9D600F9A59A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = 3DViewerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeniybokhan.-DViewerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = 3DViewer;
-			};
-			name = Debug;
-		};
-		08BD97D01F6AB9D600F9A59A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = 3DViewerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeniybokhan.-DViewerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = 3DViewer;
 			};
 			name = Release;
 		};
@@ -887,24 +691,6 @@
 			buildConfigurations = (
 				08BD97C91F6AB9D600F9A59A /* Debug */,
 				08BD97CA1F6AB9D600F9A59A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		08BD97CB1F6AB9D600F9A59A /* Build configuration list for PBXNativeTarget "3DViewerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				08BD97CC1F6AB9D600F9A59A /* Debug */,
-				08BD97CD1F6AB9D600F9A59A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		08BD97CE1F6AB9D600F9A59A /* Build configuration list for PBXNativeTarget "3DViewerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				08BD97CF1F6AB9D600F9A59A /* Debug */,
-				08BD97D01F6AB9D600F9A59A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

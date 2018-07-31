@@ -45,7 +45,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
     func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Virtual objects didSet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Model file not found"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     @objc func handleNotification(_ notification: NSNotification) {
@@ -61,11 +61,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
         }
         if notification.name.rawValue == "Model file not found" {
             self.virtualObjectSelectionViewControllerDidDeselectObject(self.objectViewController)
-            let alertController = UIAlertController(title: "Model Error", message: "Model file not found", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            let alertController = UIAlertController(title: "Model Error", message: "Model file not found", preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
-        if notification.name == NSNotification.Name.UIDeviceOrientationDidChange {
+        if notification.name == UIDevice.orientationDidChangeNotification {
             DispatchQueue.main.async {
                 self.screenCenter = self.sceneView.bounds.mid
             }
@@ -511,7 +511,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentati
             
             SCNTransaction.begin()
             SCNTransaction.animationDuration = 0.5
-            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             object.position.y = anchor.transform.columns.3.y
             SCNTransaction.commit()
         }

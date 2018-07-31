@@ -12,7 +12,7 @@ open class FileParser {
     
     // MARK: - Properties
     
-    static open let sharedInstance = FileParser()
+    static public let sharedInstance = FileParser()
     
     var _excludesFileExtensions = [String]()
     

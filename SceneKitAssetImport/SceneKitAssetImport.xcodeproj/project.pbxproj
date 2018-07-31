@@ -329,15 +329,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SceneKitAssetImport/Dependencies/Assimp/Assimp\\ Libraries/macOS",
-					"$(PROJECT_DIR)/SceneKitAssetImport/Dependencies/Assimp/Assimp\\ Libraries/macOS",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport.SceneKitAssetImport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SceneKitAssetImport/SceneKitAssetImport-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -362,14 +362,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SceneKitAssetImport/Dependencies/Assimp/Assimp\\ Libraries/macOS",
-					"$(PROJECT_DIR)/SceneKitAssetImport/Dependencies/Assimp/Assimp\\ Libraries/macOS",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport.SceneKitAssetImport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SceneKitAssetImport/SceneKitAssetImport-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

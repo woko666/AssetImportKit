@@ -38,7 +38,7 @@ class TextManager {
             // about 200 words per minute and the average English word is 5 characters
             // long. So 1000 characters per minute / 60 = 15 characters per second.
             // We limit the duration to a range of 1-10 seconds.
-            let charCount = text.characters.count
+            let charCount = text.count
             let displayDuration: TimeInterval = min(10, Double(charCount) / 15.0 + 1.0)
             messageHideTimer = Timer.scheduledTimer(withTimeInterval: displayDuration,
                                                     repeats: false,
@@ -67,7 +67,7 @@ class TextManager {
         // about 200 words per minute and the average English word is 5 characters
         // long. So 1000 characters per minute / 60 = 15 characters per second.
         // We limit the duration to a range of 1-10 seconds.
-        let charCount = message.characters.count
+        let charCount = message.count
         let displayDuration: TimeInterval = min(10, Double(charCount) / 15.0 + 1.0)
         debugMessageHideTimer = Timer.scheduledTimer(withTimeInterval: displayDuration,
                                                      repeats: false,
@@ -199,7 +199,7 @@ class TextManager {
     let blurEffectViewTag = 100
     
     func blurBackground() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = viewController.view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

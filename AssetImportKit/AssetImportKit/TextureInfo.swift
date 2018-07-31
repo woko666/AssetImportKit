@@ -258,7 +258,7 @@ import AppKit
             let aiTexture = aiTexturePointer.pointee
             let data = aiTexture.pcData
             let mWidth = aiTexture.mWidth
-            let imageData = NSData(bytes: aiTexture.pcData, length: Int(mWidth))
+            let imageData = NSData(bytes: data, length: Int(mWidth))
             
             self.imageDataProvider = CGDataProvider(data: imageData)
             let format = tupleOfInt8sToString(aiTexture.achFormatHint)
