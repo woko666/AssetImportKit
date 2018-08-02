@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/eugenebokhan/AssetImportKit"
   s.screenshots  = "https://github.com/eugenebokhan/AssetImportKit/raw/master/Media/AssetImportKit_Demonstration.png", "https://github.com/eugenebokhan/AssetImportKit/raw/master/SceneKitAssetImport/Media/SceneKitAssetImport_HowToUse.png"
 
-  s.license      = { :type => "BSD 3-Clause", :file => "LICENSE" }
+  s.license      = { :type => "BSD 3-Clause" }
 
   s.author             = { "Eugene Bokhan" => "eugenebokhan@protonmail.com" }
   s.social_media_url   = "http://twitter.com/eugenebokhan"

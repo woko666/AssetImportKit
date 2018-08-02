@@ -10,7 +10,7 @@ import Foundation
 import GLKit
 import SceneKit
 import SceneKit.ModelIO
-import PostProcessingFlags
+import postProcessingFlags
 import cimport
 import light
 import material

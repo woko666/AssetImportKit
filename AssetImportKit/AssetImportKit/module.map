@@ -24,7 +24,7 @@ module postprocess [system][extern_c] {
     export *
 }
 
-module PostProcessingFlags [system][extern_c] {
+module postProcessingFlags [system][extern_c] {
     
     header "Dependencies/Assimp/Assimp C API/PostProcessingFlags.h"
     export *

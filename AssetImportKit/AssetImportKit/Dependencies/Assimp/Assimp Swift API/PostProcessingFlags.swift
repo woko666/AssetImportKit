@@ -9,6 +9,7 @@
 import Foundation
 import scene
 import postprocess
+import postProcessingFlags
 
 
 public extension AssetImporterPostProcessSteps {
