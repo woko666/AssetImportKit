@@ -14,36 +14,10 @@ Pod::Spec.new do |s|
   s.author             = { "Eugene Bokhan" => "eugenebokhan@protonmail.com" }
   s.social_media_url   = "http://twitter.com/eugenebokhan"
 
-  s.default_subspec = 'Source'
-
-  s.subspec 'Source' do |source|
-    source.source = {
-      :git => 'https://github.com/eugenebokhan/AssetImportKit.git',
-      :tag => 'v1.0.0'
-    }
-    source.source_files  = 'AssetImportKit/**/*.{swift,h,cpp,map}'
-    source.xcconfig = {
-      'ENABLE_BITCODE' => 'NO',
-      'TARGETED_DEVICE_FAMILY' => '1,2',
-      'CLANG_WARN_DOCUMENTATION_COMMENTS' => 'NO',
-      'GCC_WARN_64_TO_32_BIT_CONVERSION' => 'NO',
-      'CLANG_WARN_COMMA' => 'NO',
-      'GCC_WARN_UNUSED_VARIABLE' => 'NO',
-      'CLANG_WARN_UNREACHABLE_CODE' => 'NO',
-      'GCC_WARN_UNUSED_FUNCTION' => 'NO',
-      'GCC_WARN_UNUSED_VALUE' => 'NO',
-      'GCC_WARN_UNUSED_VARIABLE' => 'NO',
-      'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/AssetImportKit/'
-     }
-  end
-
-  s.subspec 'GenericGeviceBinary' do |iOSBinary|
-    iOSBinary.platform = :ios, "11.3"
-    iOSBinary.source = {
-      :http => 'https://github.com/eugenebokhan/AssetImportKit/raw/master/Prebuilt/iOS_Binary_for_Generic_Gevice.zip'
-    }
-    iOSBinary.vendored_frameworks = 'AssetImportKit.framework'
-  end
-
+  s.platform = :ios, "11.3"
+  s.source = {
+    :http => 'https://github.com/eugenebokhan/AssetImportKit/raw/master/Prebuilt/iOS_Binary_for_Generic_Gevice.zip'
+  }
+  s.vendored_frameworks = 'AssetImportKit.framework'
 
 end
