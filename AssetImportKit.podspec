@@ -14,14 +14,12 @@ Pod::Spec.new do |s|
   s.author             = { "Eugene Bokhan" => "eugenebokhan@protonmail.com" }
   s.social_media_url   = "http://twitter.com/eugenebokhan"
 
-  s.ios.deployment_target = "11.3"
-  s.osx.deployment_target = "10.13"
-
-  s.subspec 'iOS Binary for Generic Gevice' do |binary|
-    binary.source = {
+  s.subspec 'GenericGeviceBinary' do |iOSBinary|
+    iOSBinary.platform = :ios, "11.3"
+    iOSBinary.source = {
       :http => 'https://github.com/eugenebokhan/AssetImportKit/Prebuilt/iOS_Binary_for_Generic_Gevice.zip'
     }
-    binary.vendored_frameworks = 'AssetImportKit.framework'
+    iOSBinary.vendored_frameworks = 'AssetImportKit.framework'
   end
 
 
