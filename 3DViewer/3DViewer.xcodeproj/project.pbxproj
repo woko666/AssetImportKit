@@ -86,10 +86,6 @@
 		08BD97A81F6AB9D500F9A59A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08BD97AA1F6AB9D500F9A59A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08BD97AF1F6AB9D500F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08BD97B81F6AB9D600F9A59A /* _DViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _DViewerTests.swift; sourceTree = "<group>"; };
-		08BD97BA1F6AB9D600F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08BD97C31F6AB9D600F9A59A /* _DViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _DViewerUITests.swift; sourceTree = "<group>"; };
-		08BD97C51F6AB9D600F9A59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08BD97D11F6ABBF500F9A59A /* DownloadFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFilesViewController.swift; sourceTree = "<group>"; };
 		08BD97D31F6AC23800F9A59A /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		08BD97D71F6AC2C400F9A59A /* 3DViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "3DViewer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -158,8 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				08BD97A21F6AB9D500F9A59A /* 3DViewer */,
-				08BD97B71F6AB9D600F9A59A /* 3DViewerTests */,
-				08BD97C21F6AB9D600F9A59A /* 3DViewerUITests */,
 				08BD97A11F6AB9D500F9A59A /* Products */,
 				08BD97EA1F6AC39A00F9A59A /* Frameworks */,
 			);
@@ -192,24 +186,6 @@
 				08BD97D71F6AC2C400F9A59A /* 3DViewer-Bridging-Header.h */,
 			);
 			path = 3DViewer;
-			sourceTree = "<group>";
-		};
-		08BD97B71F6AB9D600F9A59A /* 3DViewerTests */ = {
-			isa = PBXGroup;
-			children = (
-				08BD97B81F6AB9D600F9A59A /* _DViewerTests.swift */,
-				08BD97BA1F6AB9D600F9A59A /* Info.plist */,
-			);
-			path = 3DViewerTests;
-			sourceTree = "<group>";
-		};
-		08BD97C21F6AB9D600F9A59A /* 3DViewerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				08BD97C31F6AB9D600F9A59A /* _DViewerUITests.swift */,
-				08BD97C51F6AB9D600F9A59A /* Info.plist */,
-			);
-			path = 3DViewerUITests;
 			sourceTree = "<group>";
 		};
 		08BD97EA1F6AC39A00F9A59A /* Frameworks */ = {
