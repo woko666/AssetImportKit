@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		18F9EF17211378BF003F4B1A /* AssetImportKit-iOS-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 18F9EF18211378BF003F4B1A /* Build configuration list for PBXAggregateTarget "AssetImportKit-iOS-Universal" */;
+			buildPhases = (
+				18F9EF1B2113790E003F4B1A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "AssetImportKit-iOS-Universal";
+			productName = "AssetImportKit-iOS-Universal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1829E77D202FEFEC008B9DE7 /* AssetImportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1829E77B202FEFEC008B9DE7 /* AssetImportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1829E7FA202FF069008B9DE7 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E7BC202FF069008B9DE7 /* Scene.swift */; };
@@ -1728,6 +1742,7 @@
 		185F7574203363A0005D7724 /* revision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revision.h; sourceTree = "<group>"; };
 		185F757A203369CE005D7724 /* c4d_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = c4d_file.h; sourceTree = "<group>"; };
 		185F757D20336CBA005D7724 /* default_alien_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = default_alien_overloads.h; sourceTree = "<group>"; };
+		18F9EF1521137826003F4B1A /* AssetImportKit-iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AssetImportKit-iOS copy-Info.plist"; path = "/Users/eugenebokhan/Github/AssetImportKit/AssetImportKit/AssetImportKit-iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1754,6 +1769,7 @@
 				1829E77A202FEFEC008B9DE7 /* AssetImportKit */,
 				1829E779202FEFEC008B9DE7 /* Products */,
 				1829E817202FF17E008B9DE7 /* Frameworks */,
+				18F9EF1521137826003F4B1A /* AssetImportKit-iOS copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3302,6 +3318,9 @@
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 1000;
 					};
+					18F9EF17211378BF003F4B1A = {
+						CreatedOnToolsVersion = 10.0;
+					};
 				};
 			};
 			buildConfigurationList = 1829E772202FEFEC008B9DE7 /* Build configuration list for PBXProject "AssetImportKit" */;
@@ -3318,6 +3337,7 @@
 			targets = (
 				1829E777202FEFEC008B9DE7 /* AssetImportKit-iOS */,
 				1850D2AE2030C371006F5972 /* AssetImportKit-macOS */,
+				18F9EF17211378BF003F4B1A /* AssetImportKit-iOS-Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -3386,6 +3406,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18F9EF1B2113790E003F4B1A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"AssetImportKit-iOS\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"AssetImportKit-iOS\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/AssetImportKit.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/AssetImportKit.framework/Modules/AssetImportKit.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/AssetImportKit.framework/Modules/AssetImportKit.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/AssetImportKit.framework/AssetImportKit\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/AssetImportKit.framework/AssetImportKit\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/AssetImportKit.framework/AssetImportKit\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/AssetImportKit.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1829E773202FEFEC008B9DE7 /* Sources */ = {
@@ -4130,6 +4170,24 @@
 			};
 			name = Release;
 		};
+		18F9EF19211378BF003F4B1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U59P58LC6V;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18F9EF1A211378BF003F4B1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U59P58LC6V;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4156,6 +4214,15 @@
 			buildConfigurations = (
 				1850D2F82030C371006F5972 /* Debug */,
 				1850D2F92030C371006F5972 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18F9EF18211378BF003F4B1A /* Build configuration list for PBXAggregateTarget "AssetImportKit-iOS-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F9EF19211378BF003F4B1A /* Debug */,
+				18F9EF1A211378BF003F4B1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
