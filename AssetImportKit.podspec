@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.subspec 'GenericGeviceBinary' do |iOSBinary|
     iOSBinary.platform = :ios, "11.3"
     iOSBinary.source = {
-      :http => 'https://github.com/eugenebokhan/AssetImportKit/Prebuilt/iOS_Binary_for_Generic_Gevice.zip'
+      :http => 'https://github.com/eugenebokhan/AssetImportKit/raw/master/Prebuilt/iOS_Binary_for_Generic_Gevice.zip'
     }
     iOSBinary.vendored_frameworks = 'AssetImportKit.framework'
   end
