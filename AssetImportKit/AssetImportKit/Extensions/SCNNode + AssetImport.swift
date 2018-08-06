@@ -10,7 +10,7 @@ import Foundation
 import SceneKit
 
 /**
- A scenekit SCNNode category which imitates the SCNAnimatable protocol.
+ A scenekit SCNNode extension which imitates the SCNAnimatable protocol.
  */
 @available(iOS, deprecated: 9.0)
 @available(OSX, deprecated: 10.13)

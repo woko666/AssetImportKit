@@ -10,7 +10,7 @@ import SceneKit
 import postProcessingFlags
 
 /**
- A scenekit SCNScene category to import scenes using the assimp library.
+ A scenekit SCNScene extension to import scenes using the assimp library.
  */
 public extension SCNScene {
     
