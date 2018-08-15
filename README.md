@@ -40,7 +40,7 @@ This repository includes 2 small demos for macOS and iOS.
 
 ## Installation
 
-Install universal architecture prebuilt framework via CocoaPods: `pod 'AssetImportKit'`, for other purposes please read the [`how-to-install`](HowToInstall.md) guide.
+Install universal architecture prebuilt framework via CocoaPods: `pod 'AssetImportKit'` (currently now working correctly, you won't see needed modules), for other purposes please read the [`how-to-install`](HowToInstall.md) guide.
 
 ## Usage
 
