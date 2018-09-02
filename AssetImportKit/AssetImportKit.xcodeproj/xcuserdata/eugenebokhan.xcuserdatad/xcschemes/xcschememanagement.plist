@@ -14,11 +14,6 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>AssetImportKit-iOS-Universal.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 		<key>AssetImportKit-iOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -32,7 +27,7 @@
 		<key>AssetImportKit-macOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>AssetImportKit.xcscheme</key>
 		<dict>
