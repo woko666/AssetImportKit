@@ -80,34 +80,12 @@
 		1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetImporterScene.swift; sourceTree = "<group>"; };
 		1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNScene + AssetImport.swift"; sourceTree = "<group>"; };
 		1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode + AssetImport.swift"; sourceTree = "<group>"; };
-		183C48B5213C1BDC00418E67 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libIrrXML-fat.a"; sourceTree = "<group>"; };
-		183C48B7213C24D900418E67 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/arm64/libassimp.a; sourceTree = "<group>"; };
-		183C48B9213C251A00418E67 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/arm64/libzlibstatic.a; sourceTree = "<group>"; };
-		183C48BA213C251A00418E67 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/arm64/libIrrXML.a; sourceTree = "<group>"; };
-		183C48BE213C2E3100418E67 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libzlibstatic-fat.a"; sourceTree = "<group>"; };
-		183C48BF213C2E3100418E67 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libIrrXML-fat.a"; sourceTree = "<group>"; };
-		183C48C2213C2E5F00418E67 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/x86_64/libIrrXML.a; sourceTree = "<group>"; };
-		183C48C3213C2E5F00418E67 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/x86_64/libassimp.a; sourceTree = "<group>"; };
-		183C48C4213C2E5F00418E67 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = AssetImportKit/Dependencies/Assimp/lib/iOS/x86_64/libzlibstatic.a; sourceTree = "<group>"; };
-		183C48CB213C302700418E67 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "AssetImportKit/Dependencies/Assimp/all_archs/libIrrXML-fat.a"; sourceTree = "<group>"; };
-		183C48CC213C302700418E67 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "AssetImportKit/Dependencies/Assimp/all_archs/libassimp-fat.a"; sourceTree = "<group>"; };
-		183C48CD213C302700418E67 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/all_archs/libzlibstatic-fat.a"; sourceTree = "<group>"; };
 		183C48D1213C308A00418E67 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/Library/x86_64/libIrrXML.a; sourceTree = "<group>"; };
-		183C48D2213C308A00418E67 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = AssetImportKit/Dependencies/Assimp/Library/x86_64/libzlibstatic.a; sourceTree = "<group>"; };
 		183C48D3213C308A00418E67 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = AssetImportKit/Dependencies/Assimp/Library/x86_64/libassimp.a; sourceTree = "<group>"; };
-		183C48D7213C309D00418E67 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/Library/libzlibstatic-fat.a"; sourceTree = "<group>"; };
 		183C48D8213C309D00418E67 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "AssetImportKit/Dependencies/Assimp/Library/libIrrXML-fat.a"; sourceTree = "<group>"; };
 		183C48D9213C309D00418E67 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "AssetImportKit/Dependencies/Assimp/Library/libassimp-fat.a"; sourceTree = "<group>"; };
-		183C48E0213C337900418E67 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/Library/osx/libIrrXML.a; sourceTree = "<group>"; };
-		183C48E1213C337900418E67 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = AssetImportKit/Dependencies/Assimp/Library/osx/libassimp.a; sourceTree = "<group>"; };
 		1850D2FA2030C371006F5972 /* AssetImportKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssetImportKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1850D2FB2030C371006F5972 /* AssetImportKit-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AssetImportKit-macOS-Info.plist"; path = "/Users/eugenebokhan/Github/AssetImportKit/AssetImportKit/AssetImportKit/AssetImportKit-macOS-Info.plist"; sourceTree = "<absolute>"; };
-		18CBB964213C162D0018D1E3 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/lib/libIrrXML.a; sourceTree = "<group>"; };
-		18CBB966213C16E90018D1E3 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = AssetImportKit/Dependencies/Assimp/lib/libzlibstatic.a; sourceTree = "<group>"; };
-		18FEF9A9213C0B2B001910E8 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = "../../../../Downloads/assimp-4.1.0/lib/libIrrXML.a"; sourceTree = "<group>"; };
-		18FEF9AA213C0B2B001910E8 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = "../../../../Downloads/assimp-4.1.0/lib/libzlibstatic.a"; sourceTree = "<group>"; };
-		18FEF9AD213C0B3B001910E8 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "../../../../Downloads/assimp-4.1.0/lib/iOS/libassimp-fat.a"; sourceTree = "<group>"; };
-		18FEF9AF213C0BBE001910E8 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libassimp-fat.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,32 +194,10 @@
 		1829E817202FF17E008B9DE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				183C48E1213C337900418E67 /* libassimp.a */,
-				183C48E0213C337900418E67 /* libIrrXML.a */,
 				183C48D9213C309D00418E67 /* libassimp-fat.a */,
 				183C48D8213C309D00418E67 /* libIrrXML-fat.a */,
-				183C48D7213C309D00418E67 /* libzlibstatic-fat.a */,
 				183C48D3213C308A00418E67 /* libassimp.a */,
 				183C48D1213C308A00418E67 /* libIrrXML.a */,
-				183C48D2213C308A00418E67 /* libzlibstatic.a */,
-				183C48CC213C302700418E67 /* libassimp-fat.a */,
-				183C48CB213C302700418E67 /* libIrrXML-fat.a */,
-				183C48CD213C302700418E67 /* libzlibstatic-fat.a */,
-				183C48C3213C2E5F00418E67 /* libassimp.a */,
-				183C48C2213C2E5F00418E67 /* libIrrXML.a */,
-				183C48C4213C2E5F00418E67 /* libzlibstatic.a */,
-				183C48BF213C2E3100418E67 /* libIrrXML-fat.a */,
-				183C48BE213C2E3100418E67 /* libzlibstatic-fat.a */,
-				183C48BA213C251A00418E67 /* libIrrXML.a */,
-				183C48B9213C251A00418E67 /* libzlibstatic.a */,
-				183C48B7213C24D900418E67 /* libassimp.a */,
-				183C48B5213C1BDC00418E67 /* libIrrXML-fat.a */,
-				18CBB966213C16E90018D1E3 /* libzlibstatic.a */,
-				18CBB964213C162D0018D1E3 /* libIrrXML.a */,
-				18FEF9AD213C0B3B001910E8 /* libassimp-fat.a */,
-				18FEF9AF213C0BBE001910E8 /* libassimp-fat.a */,
-				18FEF9A9213C0B2B001910E8 /* libIrrXML.a */,
-				18FEF9AA213C0B2B001910E8 /* libzlibstatic.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
