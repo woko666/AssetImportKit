@@ -56,7 +56,7 @@ There are two ways to install `AssetImportKit` via `CocoaPods`:
   ```Ruby
   pod 'AssetImportKit/ARM64'
   ```
-  > In this case `AssetImportKit.framework` will contain only `ARM64` architecture needed for uploading to `AppStore`.
+  > In this case `AssetImportKit.framework` will contain only `ARM64` architecture needed for uploading to the `AppStore`.
 
 ## Manual Installation
 
