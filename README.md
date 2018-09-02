@@ -38,9 +38,29 @@ This repository includes 2 small demos for macOS and iOS.
 - iOS 11.3 or later
 - macOS 10.13 or later
 
-## Installation
+## Installation via `CocoaPods`
 
-Install universal architecture prebuilt framework via CocoaPods: `pod 'AssetImportKit'` (currently now working correctly, you won't see needed modules), for other purposes please read the [`how-to-install`](HowToInstall.md) guide.
+There are two ways to install `AssetImportKit` via `CocoaPods`:
+
+* for development purposes:
+  ```Ruby
+  pod 'AssetImportKit/Universal'
+  ```
+  or just
+  ```Ruby
+  pod 'AssetImportKit'
+  ```
+  > In this case `AssetImportKit.framework` will contain `ARM64` and `x86_64` architectures needed for `Generic Device` and `Simulator` targets respectively.
+
+* for release purposes:
+  ```Ruby
+  pod 'AssetImportKit/ARM64'
+  ```
+  > In this case `AssetImportKit.framework` will contain only `ARM64` architecture needed for uploading to `AppStore`.
+
+## Manual Installation
+
+In order to install `AssetImportKit` manually please read the [`How-to-Install`](HowToInstall.md) guide.
 
 ## Usage
 
@@ -60,6 +80,7 @@ sceneView.scene?.rootNode.addChildNode(modelContainerNode)
 Note for `iOS` builds: if you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
 
 ## Author
+
 | [<img src="https://avatars1.githubusercontent.com/u/8983647?s=460&amp;v=4" width="120px;"/>](https://github.com/eugenebokhan)   | [Eugene Bokhan](https://github.com/eugenebokhan)<br/><br/><sub>Software Engineer @ [Prisma AI](https://prismalabs.ai)</sub><br/> [![Twitter][1.1]][1] [![Github][2.1]][2] [![LinkedIn][3.1]][3]|
 | - | :- |
 
@@ -71,8 +92,6 @@ Note for `iOS` builds: if you are developing an `iOS` application, set the `Enab
 [2]: https://github.com/eugenebokhan
 [3]: https://www.linkedin.com/in/eugenebokhan/
 
+## License
 
-License
----
-
-[AssetImportKit's license](LICENSE.md) is based on the modified, 3-clause BSD-License.
+[AssetImportKit's license](LICENSE) is based on 3-clause BSD-License.
