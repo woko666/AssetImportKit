@@ -36,7 +36,7 @@ public extension SCNScene {
                     return nil
                 }
             } catch {
-                print("The file could not be loaded")
+                //print("The file could not be loaded")
             }
         }
         

@@ -93,7 +93,7 @@ public extension SCNNode {
         }
         else {
             // no root exists, so add animation data to all bones
-            print(" no root: \(String(describing: rootAnimNode.parent)) \(String(describing: rootAnimNode.parent?.childNodes.count))")
+            //print(" no root: \(String(describing: rootAnimNode.parent)) \(String(describing: rootAnimNode.parent?.childNodes.count))")
             if let parent = rootAnimNode.parent {
                 addAnimation(from: parent, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
             }
@@ -145,7 +145,7 @@ public extension SCNNode {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
             for suffix: String in suffixes {
                 let key: String = keyPrefix + (suffix) + (animKey)
-                print(" pausing animation with key: \(key)")
+                //print(" pausing animation with key: \(key)")
                 animNode.pauseAnimation(forKey: key)
             }
         }
@@ -171,7 +171,7 @@ public extension SCNNode {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
             for suffix: String in suffixes {
                 let key: String = keyPrefix + (suffix) + (animKey)
-                print(" resuming animation with key: %@", key)
+                //print(" resuming animation with key: %@", key)
                 animNode.resumeAnimation(forKey: key)
             }
         }
@@ -199,7 +199,7 @@ public extension SCNNode {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
             for suffix: String in suffixes {
                 let key: String = keyPrefix + (suffix) + (animKey)
-                print(" resuming animation with key: %@", key)
+                //print(" resuming animation with key: %@", key)
                 paused = animNode.isAnimationPaused(forKey: key)
             }
         }
@@ -245,7 +245,7 @@ public extension SCNNode {
         
         enumerateChildNodes({(child: SCNNode, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
             if child.animationKeys.count > 0 {
-                print(" found anim: \(child.animationKeys) at node \(child)")
+                //print(" found anim: \(child.animationKeys) at node \(child)")
                 rootAnimNode = child
                 stop.pointee = true
             }

@@ -109,8 +109,8 @@ import scene
             
             // The pointer has a renference to nil if the import failed.
             let errorString = tupleOfInt8sToString(aiGetErrorString().pointee)
-            print(" Scene importing failed for filePath \(filePath)")
-            print(" Scene importing failed with error \(String(describing: errorString))")
+            //print(" Scene importing failed for filePath \(filePath)")
+            //print(" Scene importing failed with error \(String(describing: errorString))")
             
             // Return error
             if error != nil {
@@ -146,7 +146,7 @@ import scene
      */
     public func makeSCNScene(fromAssimpScene aiScene: inout aiScene, atPath path: String) -> AssetImporterScene {
         
-        print("Make an SCNScene")
+        //print("Make an SCNScene")
         
         let aiRootNode = aiScene.mRootNode.pointee
         var scene = AssetImporterScene()
@@ -200,14 +200,14 @@ import scene
          */
         let aiNodeName = aiNode.mName
         node.name = aiNodeName.stringValue()
-        print("Creating node \(String(describing: node.name!)) with \(aiNode.mNumMeshes) meshes")
+        //print("Creating node \(String(describing: node.name!)) with \(aiNode.mNumMeshes) meshes")
         /*
          ---------------------------------------------------------------------
          Make SCNGeometry
          ---------------------------------------------------------------------
          */
         let nVertices = findNumVertices(in: aiNode, in: aiScene)
-        print("nVertices : \(nVertices)")
+        //print("nVertices : \(nVertices)")
         if nVertices > 0 {
             if let nodeGeometry = makeSCNGeometry(fromAssimpNode: aiNode, in: &aiScene, withVertices: nVertices, atPath: path) {
                 node.geometry = nodeGeometry
@@ -249,7 +249,7 @@ import scene
         let scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix)
         node.transform = scnMatrix
         
-        print("Node \(String(describing: node.name!)) position is: \(aiNodeMatrix.a4) \(aiNodeMatrix.b4) \(aiNodeMatrix.c4)")
+        //print("Node \(String(describing: node.name!)) position is: \(aiNodeMatrix.a4) \(aiNodeMatrix.b4) \(aiNodeMatrix.c4)")
         
         for i in 0 ..< aiNode.mNumChildren {
             
@@ -368,7 +368,7 @@ import scene
                 let aiMesh = aiMeshPointer.pointee
                 if aiMesh.mVertices != nil {
                     
-                    print("Getting vertices")
+                    //print("Getting vertices")
                     for j in 0 ..< aiMesh.mNumVertices {
                         
                         let aiVector3D = aiMesh.mVertices[Int(j)]
@@ -415,7 +415,7 @@ import scene
                 let aiMesh = aiMeshPointer.pointee
                 if aiMesh.mNormals != nil {
                     
-                    print("Getting normals")
+                    //print("Getting normals")
                     for j in 0 ..< aiMesh.mNumVertices {
                         
                         let aiVector3D = aiMesh.mNormals[Int(j)]
@@ -463,7 +463,7 @@ import scene
                 let aiMesh = aiMeshPointer.pointee
                 if aiMesh.mTangents != nil {
                     
-                    print("Getting tangents")
+                    //print("Getting tangents")
                     for j in 0 ..< aiMesh.mNumVertices {
                         
                         let aiVector3D = aiMesh.mTangents[Int(j)]
@@ -498,7 +498,7 @@ import scene
      @param nVertices The number of vertices in the meshes of the node.
      @return A new geometry source whose semantic property is texcoord.
      */
-    public func makeTextureGeometrySource(for aiNode: aiNode, in aiScene: aiScene, withNVertices nVertices: Int) -> SCNGeometrySource {
+    public func makeTextureGeometrySource(for aiNode: aiNode, in aiScene: aiScene, withNVertices nVertices: Int, index:Int, nullOnNotFound:Bool) -> SCNGeometrySource? {
         
         let scnTextures = UnsafeMutablePointer<Float>.allocate(capacity: nVertices * 3)
         var verticesCounter: Int = 0
@@ -509,19 +509,26 @@ import scene
             if let aiMeshPointer = aiScene.mMeshes[Int(aiMeshIndex)] {
                 
                 let aiMesh = aiMeshPointer.pointee
-                if aiMesh.mTextureCoords.0 != nil {
+                var coords:UnsafeMutablePointer<aiVector3D>?
+                if index == 0 && aiMesh.mTextureCoords.0 != nil {
+                    coords = aiMesh.mTextureCoords.0
+                } else if index == 1 && aiMesh.mTextureCoords.1 != nil {
+                    coords = aiMesh.mTextureCoords.1
+                }
+                if let coords = coords {
                     
-                    print("Getting texture coordinates")
+                    //print("Getting texture coordinates ",index,"for",aiMesh.mName.stringValue(),coords[0].x,coords[0].y)
                     for j in 0 ..< aiMesh.mNumVertices {
                         
-                        let x = aiMesh.mTextureCoords.0![Int(j)].x
-                        let y = aiMesh.mTextureCoords.0![Int(j)].y
+                        let x = coords[Int(j)].x
+                        let y = 1.0 - coords[Int(j)].y
                         scnTextures[verticesCounter] = x
                         verticesCounter += 1
                         scnTextures[verticesCounter] = y
                         verticesCounter += 1
-                        
                     }
+                } else if nullOnNotFound {
+                    return nil
                 }
             }
         }
@@ -605,7 +612,13 @@ import scene
         scnGeometrySources.append(makeVertexGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
         scnGeometrySources.append(makeNormalGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
         scnGeometrySources.append(makeTangentGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
-        scnGeometrySources.append(makeTextureGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
+        //scnGeometrySources.append(makeTextureGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
+        if let source = makeTextureGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices, index:0, nullOnNotFound: false) {
+            scnGeometrySources.append(source)
+        }
+        if let source = makeTextureGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices, index:1, nullOnNotFound: true) {
+            scnGeometrySources.append(source)
+        }
         if let colorGeometrySource = makeColorGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices) as SCNGeometrySource? {
             scnGeometrySources.append(colorGeometrySource)
         }
@@ -875,7 +888,7 @@ import scene
                     var nameTempVar = aiString()
                     aiGetMaterialString(&aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.type, &nameTempVar)
                     let materialName = nameTempVar.stringValue()
-                    print("Material name is \(materialName)")
+                    //print("Material name is \(materialName)")
                     material.name = materialName
                     
                     let textureTypes = [aiTextureType_DIFFUSE,      aiTextureType_SPECULAR,
@@ -894,32 +907,33 @@ import scene
                         
                         if let textureTypeName = textureTypeNames.value(forKey: "\(i)") {
                             
-                            print("Loading texture type : \(textureTypeName)")
-                            print("Texture type: \(textureTypes[i])")
-                            print("Texture type raw value: \(textureTypes[i].rawValue)")
+                            //print("Loading texture type : \(textureTypeName)")
+                            //print("Texture type: \(textureTypes[i])")
+                            //print("Texture type raw value: \(textureTypes[i].rawValue)")
                             let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex), textureType: textureTypes[i], in: &aiScene, atPath: path as NSString)
                             self.makeMaterialProperty(for: &material, with: textureInfo)
                             textureInfo.releaseContents()
                             
                         }
                     }
-                    print("Loading multiply color")
+                    //print("Loading multiply color")
                     self.applyMultiplyProperty(for: &aiMaterial, with: &material)
+                    //self.printColors(for: &aiMaterial)
                     
-                    print("Loading blend mode")
+                    //print("Loading blend mode")
                     var blendMode: Int32 = 0
                     var max: UInt32 = 0
                     aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &blendMode, &max)
                     if blendMode == Int32(aiBlendMode_Default.rawValue) {
-                        print("Using alpha blend mode")
+                        //print("Using alpha blend mode")
                         material.blendMode = .alpha
                     }
                     else if blendMode == Int32(aiBlendMode_Additive.rawValue) {
-                        print("Using add blend mode")
+                        //print("Using add blend mode")
                         material.blendMode = .add
                     }
                     
-                    print("Loading cull/double sided mode")
+                    //print("Loading cull/double sided mode")
                     var cullModeRawValue: Int32 = 0
                     aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
                     if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
@@ -928,14 +942,14 @@ import scene
                         material.cullMode = .back
                     }
                     
-                    print("Loading shininess")
+                    //print("Loading shininess")
                     var shininess: Int32 = 0
                     aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
                     
-                    print("shininess: \(shininess)")
+                    //print("shininess: \(shininess)")
                     material.shininess = CGFloat(shininess)
                     
-                    print("Loading shading model")
+                    //print("Loading shading model")
                     /**
                      FIXME: The shading mode works only on iOS for iPhone.
                      Does not work on iOS for iPad and OS X.
@@ -1017,7 +1031,7 @@ import scene
         let aiColor = aiLight.mColorSpecular
         if aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0 {
             
-            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            //print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
@@ -1049,7 +1063,7 @@ import scene
         let aiColor = aiLight.mColorSpecular
         if aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0 {
             
-            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            //print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
@@ -1086,7 +1100,7 @@ import scene
         let aiColor = aiLight.mColorSpecular
         if aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0 {
             
-            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            //print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
@@ -1138,27 +1152,27 @@ import scene
                     let lightNodeName = aiLightNodeName.stringValue()
                     if (nodeName == lightNodeName) {
                         
-                        print("Creating light for node \(nodeName)")
-                        print("ambient \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
-                        print("diffuse \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
-                        print("specular \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
-                        print("inner angle \(aiLight.mAngleInnerCone)")
-                        print("outer angle \(aiLight.mAngleOuterCone)")
-                        print("att const \(aiLight.mAttenuationConstant)")
-                        print("att linear \(aiLight.mAttenuationLinear)")
-                        print("att quad \(aiLight.mAttenuationQuadratic)")
-                        print("position \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
+                        //print("Creating light for node \(nodeName)")
+                        //print("ambient \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
+                        //print("diffuse \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
+                        //print("specular \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
+                        //print("inner angle \(aiLight.mAngleInnerCone)")
+                        //print("outer angle \(aiLight.mAngleOuterCone)")
+                        //print("att const \(aiLight.mAttenuationConstant)")
+                        //print("att linear \(aiLight.mAttenuationLinear)")
+                        //print("att quad \(aiLight.mAttenuationQuadratic)")
+                        //print("position \(aiLight.mColorAmbient.r), \(aiLight.mColorAmbient.g), \(aiLight.mColorAmbient.b) ")
                         
                         if aiLight.mType == aiLightSource_DIRECTIONAL {
-                            print("type Directional")
+                            //print("type Directional")
                             return makeSCNLightTypeDirectional(forAssimpLight: aiLight)
                         }
                         else if aiLight.mType == aiLightSource_POINT {
-                            print("type Omni")
+                            //print("type Omni")
                             return makeSCNLightTypePoint(forAssimpLight: aiLight)
                         }
                         else if aiLight.mType == aiLightSource_SPOT {
-                            print("type Spot")
+                            //print("type Spot")
                             return makeSCNLightTypeSpot(forAssimpLight: aiLight)
                         }
                         
@@ -1375,7 +1389,7 @@ import scene
             let depth = findDepthOfNode(fromRoot: boneNode)
             if let boneNodeName = boneNode.name {
                 
-                print("bone with depth is (min depth): \(boneNodeName) -> \(depth) ( \(minDepth) )")
+                //print("bone with depth is (min depth): \(boneNodeName) -> \(depth) ( \(minDepth) )")
                 
             }
             if minDepth == -1 || (depth <= minDepth) {
@@ -1398,7 +1412,7 @@ import scene
         let minDepthKey = "\(minDepth)"
         if let minDepthNodes = nodeDepths.value(forKey: minDepthKey) as? NSArray {
             
-            print("min depth nodes are: \(String(describing: minDepthNodes))")
+            //print("min depth nodes are: \(String(describing: minDepthNodes))")
             
             if let skeletonRootNode = minDepthNodes[0] as? SCNNode {
                 
@@ -1568,7 +1582,7 @@ import scene
             }
         }
         
-        print("weight counter \(weightCounter)")
+        //print("weight counter \(weightCounter)")
         
         assert(weightCounter == nVertices * maxWeights)
         
@@ -1596,7 +1610,7 @@ import scene
      */
     public func makeBoneIndicesGeometrySource(at aiNode: aiNode, in aiScene: aiScene, withVertices nVertices: Int, maxWeights: Int, boneNames: [String]) -> SCNGeometrySource {
         
-        print("Making bone indices geometry source: \(boneNames)")
+        //print("Making bone indices geometry source: \(boneNames)")
         
         let nodeGeometryBoneIndices = UnsafeMutablePointer<CShort>.allocate(capacity: nVertices * maxWeights)
         var indexCounter: Int = 0
@@ -1685,21 +1699,21 @@ import scene
         
         uniqueBoneNames = boneNames
         
-        print("bone names \(uniqueBoneNames.count): \(uniqueBoneNames)")
-        print("unique bone names \(uniqueBoneNames.count): \(uniqueBoneNames)")
+        //print("bone names \(uniqueBoneNames.count): \(uniqueBoneNames)")
+        //print("unique bone names \(uniqueBoneNames.count): \(uniqueBoneNames)")
         
         uniqueBoneNodes = findBoneNodes(in: scene, forBones: uniqueBoneNames)
         
-        print("unique bone nodes \(uniqueBoneNodes.count): \(uniqueBoneNodes)")
+        //print("unique bone nodes \(uniqueBoneNodes.count): \(uniqueBoneNodes)")
         
         uniqueBoneTransforms = getTransformsForBones(uniqueBoneNames, fromTransforms: boneTransforms)
         
-        print("unique bone transforms \(uniqueBoneTransforms.count): \(uniqueBoneTransforms)")
+        //print("unique bone transforms \(uniqueBoneTransforms.count): \(uniqueBoneTransforms)")
         
         skeleton = findSkeletonNode(fromBoneNodes: uniqueBoneNodes)
         scene.skeletonNode = self.skeleton
         
-        print("skeleton bone is : \(skeleton)")
+        //print("skeleton bone is : \(skeleton)")
         
     }
     
@@ -1721,19 +1735,19 @@ import scene
             let nVertices = findNumVertices(in: aiNode, in: aiScene)
             let maxWeights = findMaxWeights(for: aiNode, in: aiScene)
             
-            print("Making Skinner for node: \(nodeName) vertices: \(nVertices) max-weights: \(maxWeights), nBones: \(nBones)")
+            //print("Making Skinner for node: \(nodeName) vertices: \(nVertices) max-weights: \(maxWeights), nBones: \(nBones)")
             
             let boneWeights = makeBoneWeightsGeometrySource(at: aiNode, in: aiScene, withVertices: nVertices, maxWeights: maxWeights)
             let boneIndices = makeBoneIndicesGeometrySource(at: aiNode, in: aiScene, withVertices: nVertices, maxWeights: maxWeights, boneNames: uniqueBoneNames)
             
             if let node = scene.rootNode.childNode(withName: nodeName, recursively: true) {
                 
-                print(uniqueBoneNodes.count)
-                print(uniqueBoneTransforms.count)
+                //print(uniqueBoneNodes.count)
+                //print(uniqueBoneTransforms.count)
                 let skinner = SCNSkinner(baseGeometry: node.geometry, bones: uniqueBoneNodes, boneInverseBindTransforms: uniqueBoneTransforms as [NSValue], boneWeights: boneWeights, boneIndices: boneIndices)
                 skinner.skeleton = self.skeleton
                 
-                print(" assigned skinner \(skinner) skeleton: \(String(describing: skinner.skeleton))")
+                //print(" assigned skinner \(skinner) skeleton: \(String(describing: skinner.skeleton))")
                 
                 node.skinner = skinner
                 
@@ -1771,10 +1785,10 @@ import scene
      */
     public func createAnimations(from aiScene: aiScene, with scene: inout AssetImporterScene, atPath path: String) {
         
-        print("Number of animations in scene: \(aiScene.mNumAnimations)")
+        //print("Number of animations in scene: \(aiScene.mNumAnimations)")
         for i in 0 ..< aiScene.mNumAnimations {
             
-            print("Animation data for animation at index: \(i)")
+            //print("Animation data for animation at index: \(i)")
             
             if let aiAnimationPointer = aiScene.mAnimations[Int(i)] {
                 
@@ -1782,11 +1796,11 @@ import scene
                 let animIndex = "-" + "\(i + 1)"
                 let animName = (((((path as NSString).lastPathComponent) as NSString).deletingPathExtension) as NSString).appending(animIndex)
                 
-                print("Generated animation name: \(animName)")
+                //print("Generated animation name: \(animName)")
                 
                 let currentAnimation = NSMutableDictionary()
                 
-                print("This animation \(animName) has \(aiAnimation.mNumChannels) channels with duration \(aiAnimation.mDuration) ticks per sec: \(aiAnimation.mTicksPerSecond)")
+                //print("This animation \(animName) has \(aiAnimation.mNumChannels) channels with duration \(aiAnimation.mDuration) ticks per sec: \(aiAnimation.mTicksPerSecond)")
                 
                 var duration: Double
                 if aiAnimation.mTicksPerSecond != 0 {
@@ -1801,7 +1815,7 @@ import scene
                         let aiNodeName = aiNodeAnim.mNodeName
                         let name = aiNodeName.stringValue()
                         
-                        print(" The channel \(name) has data for \(aiNodeAnim.mNumPositionKeys) position, \(aiNodeAnim.mNumRotationKeys) rotation, \(aiNodeAnim.mNumScalingKeys) scale keyframes")
+                        //print(" The channel \(name) has data for \(aiNodeAnim.mNumPositionKeys) position, \(aiNodeAnim.mNumRotationKeys) rotation, \(aiNodeAnim.mNumScalingKeys) scale keyframes")
                         
                         // create a lookup for all animation keys
                         let channelKeys = NSMutableDictionary()

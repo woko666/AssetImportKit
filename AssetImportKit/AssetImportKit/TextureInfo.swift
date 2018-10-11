@@ -155,7 +155,7 @@ import AppKit
             let nameString = name.stringValue()
             self.materialName = nameString as NSString
             if let materialName = self.materialName {
-                print(" Material name is \(materialName)")
+                //print(" Material name is \(materialName)")
             }
             checkTextureType(for: aiMaterial!, with: aiTextureType, in: &aiScene, atPath: path)
             
@@ -178,8 +178,8 @@ import AppKit
         
         let nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType)
         
-        print("has textures: \(nTextures)")
-        print("has embedded textures: \(aiScene.mNumTextures)")
+        //print("has textures: \(nTextures)")
+        //print("has embedded textures: \(aiScene.mNumTextures)")
         
         if nTextures == 0 && aiScene.mNumTextures == 0 {
             
@@ -199,7 +199,7 @@ import AppKit
                 aiGetMaterialTexture(aiMaterial, aiTextureType, UInt32(0), &aiPath, nil, nil, nil, nil, nil, nil)
                 let texFilePath = aiPath.stringValue() as NSString
                 
-                print("tex file path is: \(texFilePath)")
+                //print("tex file path is: \(texFilePath)")
                 
                 let texFileName = texFilePath.lastPathComponent
                 if texFileName == "" {
@@ -214,7 +214,7 @@ import AppKit
                         self.applyEmbeddedTexture = true
                         self.embeddedTextureIndex = embeddedTextureIndex
                         
-                        print("Embedded texture index: \(embeddedTextureIndex)")
+                        //print("Embedded texture index: \(embeddedTextureIndex)")
                         
                         self.generateCGImageForEmbeddedTexture(at: embeddedTextureIndex, in: aiScene)
                         
@@ -223,13 +223,13 @@ import AppKit
                     
                     self.applyExternalTexture = true
                     
-                    print("tex file name is \(String(describing: texFileName))")
+                    //print("tex file name is \(String(describing: texFileName))")
                     
                     let sceneDir = (path.deletingLastPathComponent).appending("/") as NSString
                     self.externalTexturePath = sceneDir.appending(texFileName) as NSString
                     if let externalTexturePath = self.externalTexturePath {
                         
-                        print("tex path is \(externalTexturePath)")
+                        //print("tex path is \(externalTexturePath)")
                         
                         self.generateCGImageForExternalTexture(atPath: externalTexturePath)
                     }
@@ -251,7 +251,7 @@ import AppKit
      */
     public func generateCGImageForEmbeddedTexture(at index: Int, in aiScene: aiScene) {
         
-        print("Generating embedded texture")
+        //print("Generating embedded texture")
         
         if let aiTexturePointer = aiScene.mTextures[index] {
             
@@ -264,13 +264,13 @@ import AppKit
             let format = tupleOfInt8sToString(aiTexture.achFormatHint)
             if format == "png" {
                 
-                print(" Created png embedded texture")
+                //print(" Created png embedded texture")
                 
                 self.image = CGImage.init(pngDataProviderSource: self.imageDataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             }
             if format == "jpg" {
                 
-                print(" Created jpg embedded texture")
+                //print(" Created jpg embedded texture")
                 
                 self.image = CGImage.init(jpegDataProviderSource: self.imageDataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             }
@@ -287,7 +287,7 @@ import AppKit
      */
     public func generateCGImageForExternalTexture(atPath path: NSString) {
         
-        print(" Generating external texture ")
+        //print(" Generating external texture ")
         
         let imageURL = NSURL.fileURL(withPath: path as String)
         self.imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil)
@@ -302,7 +302,7 @@ import AppKit
     
     public func extractColor(for aiMaterial: UnsafeMutablePointer<aiMaterial>, with aiTextureType: aiTextureType) {
         
-        print("Extracting color")
+        //print("Extracting color")
         
         var color = aiColor4D()
         color.r = 0.0
